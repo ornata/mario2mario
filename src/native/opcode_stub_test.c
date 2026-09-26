@@ -82,7 +82,10 @@ int main(void) {
     for (int t = 0; t < TRIALS && !bad; t++) {
       rng = 0x9E3779B97F4A7C15ull ^ ((uint64_t)s << 20) ^ (uint64_t)t;
       CpuState init;
-      random_state(&init, t & 1);
+      /* FP values in the format the instruction uses (NaN handling is
+       * not part of the per-opcode check). */
+      int doubles = strstr(text, ".d") ? 1 : strstr(text, ".s") ? 0 : t & 1;
+      random_state(&init, doubles);
       /* Memory instructions address the data window. */
       if (op != MIPS_OP_INVALID &&
           (mips_operand_bits(op) & 0x03E0FFFFu) == 0x03E0FFFFu) {
