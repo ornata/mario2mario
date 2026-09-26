@@ -34,6 +34,7 @@ cc_test(
 cc_library(
     name = "mips",
     srcs = [
+        "mips_asm.c",
         "mips_decode.c",
         "mips_ops.c",
     ],
@@ -52,6 +53,19 @@ cc_binary(
     srcs = ["listing.c"],
     deps = [
         ":mips",
+        ":z64",
+    ],
+)
+
+cc_test(
+    name = "decoder_roundtrip_test",
+    size = "small",
+    srcs = ["decoder_roundtrip_test.c"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":mips",
+        ":rom_env",
         ":z64",
     ],
 )

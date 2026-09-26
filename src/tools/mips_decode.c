@@ -113,6 +113,8 @@ void mips_init(void) {
   memcpy(fill, leaf_start, sizeof(fill));
   for (uint16_t i = 0; i < mips_op_count; i++)
     leaf_ops[fill[leaf_of[i]]++] = i;
+
+  mips_asm_init();
 }
 
 uint16_t mips_decode(uint32_t word) {

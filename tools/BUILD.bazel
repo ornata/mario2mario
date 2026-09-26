@@ -7,3 +7,9 @@ alias(
     name = "listing",
     actual = "//src/tools:listing",
 )
+
+# Full-ROM decode -> text -> encode bijectivity (reads the ROM via $M2M_ROM).
+alias(
+    name = "decoder_roundtrip_test",
+    actual = "//src/tools:decoder_roundtrip_test",
+)

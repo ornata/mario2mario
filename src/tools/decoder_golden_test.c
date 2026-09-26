@@ -1,4 +1,5 @@
-/* Hand-derived decodings from the R4300i encodings (no ROM needed).
+/* Hand-derived decodings from the R4300i encodings (no ROM needed),
+ * checked in both directions (decode+format, and assemble back).
  * Each expected string was worked out bit-by-bit from the ISA fields,
  * independently of the table in mips_ops.c. */
 #include <stdio.h>
@@ -79,6 +80,24 @@ static const Golden goldens[] = {
     {0x80246000, 0x7C000000, ".word 0x7C000000"}, /* opcode 31 */
 };
 
+/* Text the assembler must refuse (range, syntax, unknown names). */
+static const char *const rejects[] = {
+    "addiu $t0, $t0, 0x8000",
+    "addiu $t0, $t0, -0x8001",
+    "andi $v0, $a1, -0x1",
+    "sll $v0, $a0, 32",
+    "lw $ra, 0x14",
+    "add.s $f4, $f4, $f32",
+    "mfc0 $t0, $Bogus",
+    "jr $x9",
+    "jr $ra, $ra",
+    "j 0x90000000",
+    "beq $zero, $zero, 0x80246002",
+    "frobnicate $t0",
+    "nop ",
+    ".word -0x1",
+};
+
 int main(void) {
   mips_init();
   int failures = 0;
@@ -89,6 +108,19 @@ int main(void) {
     if (strcmp(text, g->text) != 0) {
       fprintf(stderr, "%08X  %08X: got \"%s\", want \"%s\"\n", g->addr, g->word,
               text, g->text);
+      failures++;
+    }
+    uint32_t back = 0;
+    if (!mips_assemble(g->text, g->addr, &back) || back != g->word) {
+      fprintf(stderr, "assemble \"%s\": got %08X, want %08X\n", g->text, back,
+              g->word);
+      failures++;
+    }
+  }
+  for (size_t i = 0; i < sizeof(rejects) / sizeof(rejects[0]); i++) {
+    uint32_t w;
+    if (mips_assemble(rejects[i], 0x80246000, &w)) {
+      fprintf(stderr, "accepted \"%s\" as %08X\n", rejects[i], w);
       failures++;
     }
   }

@@ -1,4 +1,4 @@
-/* MIPS R4300i instruction decoder.
+/* MIPS R4300i instruction decoder and re-encoder.
  *
  * Table-driven from the ISA encodings: every instruction form is one row
  * of mips_ops[] (mnemonic, fixed-bit pattern, operand kinds, flow flags).
@@ -66,6 +66,9 @@ enum { MIPS_TEXT_MAX = 64 };
 /* Builds the derived lookup tables. Call once before anything else. */
 void mips_init(void);
 
+/* Internal: builds the assembler's name index (called by mips_init). */
+void mips_asm_init(void);
+
 /* Returns the mips_ops[] index for `word`, or MIPS_OP_INVALID. */
 uint16_t mips_decode(uint32_t word);
 
@@ -80,6 +83,11 @@ uint32_t mips_target(uint32_t word, uint16_t op, uint32_t addr);
  * or ".word 0xXXXXXXXX" for MIPS_OP_INVALID. Returns the text length.
  * `buf` must hold MIPS_TEXT_MAX bytes. */
 size_t mips_format(uint32_t word, uint16_t op, uint32_t addr, char *buf);
+
+/* Parses text produced by mips_format (one instruction, without the
+ * address and hex columns) as if located at `addr`, and encodes it.
+ * Returns 1 and sets *word on success, 0 on any syntax or range error. */
+int mips_assemble(const char *text, uint32_t addr, uint32_t *word);
 
 /* Register-name tables shared by formatter and assembler. */
 extern const char *const mips_gpr_names[32];
