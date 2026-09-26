@@ -1,5 +1,5 @@
 load("@rom//:defs.bzl", "ROM_PATH")
-load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -27,6 +27,31 @@ cc_test(
     tags = ["external"],
     deps = [
         ":rom_env",
+        ":z64",
+    ],
+)
+
+cc_library(
+    name = "mips",
+    srcs = [
+        "mips_decode.c",
+        "mips_ops.c",
+    ],
+    hdrs = ["mips.h"],
+)
+
+cc_test(
+    name = "decoder_golden_test",
+    size = "small",
+    srcs = ["decoder_golden_test.c"],
+    deps = [":mips"],
+)
+
+cc_binary(
+    name = "listing",
+    srcs = ["listing.c"],
+    deps = [
+        ":mips",
         ":z64",
     ],
 )

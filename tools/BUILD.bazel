@@ -1,0 +1,9 @@
+# Stable command-line names for the mechanical tooling in //src/tools.
+#   bazelisk run //tools:listing -- <rom.z64> <rom_start> <rom_end> <ram_base>
+
+package(default_visibility = ["//visibility:public"])
+
+alias(
+    name = "listing",
+    actual = "//src/tools:listing",
+)
