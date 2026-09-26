@@ -95,3 +95,9 @@ cc_test(
         ":mips",
     ],
 )
+
+cc_binary(
+    name = "codemap",
+    srcs = ["codemap.c"],
+    deps = [":mips"],
+)

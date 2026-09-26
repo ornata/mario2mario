@@ -25,3 +25,9 @@ alias(
     name = "recgen",
     actual = "//src/rcp:recgen",
 )
+
+#   bazelisk run //tools:codemap -- EXEC_WORDS.txt OUT_DIR
+alias(
+    name = "codemap",
+    actual = "//src/tools:codemap",
+)
