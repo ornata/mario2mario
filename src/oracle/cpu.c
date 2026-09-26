@@ -998,6 +998,10 @@ StopReason oracle_run(Oracle *o, uint64_t until) {
     if (c->boundary && !c->in_delay) {
       c->boundary = 0;
       at_boundary(o);
+      /* An interrupt taken here makes the vector a boundary of its own
+       * (timebase.h: "right after exception entry"): process it before
+       * fetching the vector's first instruction. */
+      continue;
     }
 
     uint32_t pc = c->pc, pa, w;
