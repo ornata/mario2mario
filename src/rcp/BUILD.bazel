@@ -25,3 +25,19 @@ cc_test(
         "//src/hw",
     ],
 )
+
+cc_library(
+    name = "png",
+    srcs = ["png.c"],
+    hdrs = ["png.h"],
+)
+
+cc_library(
+    name = "gl",
+    srcs = ["gl.c"],
+    hdrs = ["gl.h"],
+    deps = [
+        ":gfx",
+        "//third_party:gl",
+    ],
+)
