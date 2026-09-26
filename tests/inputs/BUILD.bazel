@@ -1,0 +1,4 @@
+package(default_visibility = ["//visibility:public"])
+
+# Controller recordings (.rec) and the recgen scripts they are built from.
+exports_files(glob(["*.rec", "*.txt"]))

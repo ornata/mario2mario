@@ -1,0 +1,6 @@
+package(default_visibility = ["//visibility:public"])
+
+# Golden graphics-task display-list hash streams (one hex hash per line)
+# and golden frames, regenerated with //oracle:run --task-hashes and
+# //oracle:play --headless --png.
+exports_files(glob(["*.hashes", "*.png"]))

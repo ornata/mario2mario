@@ -1,0 +1,30 @@
+# title.rec: boot to the title screen (Mario's head) and play with the
+# face for ~30 s (one record per controller poll, 30 polls/s). Compile
+# with: bazelisk run //tools:recgen -- tests/inputs/title.txt tests/inputs/title.rec
+#
+# Boot: Nintendo logo, SUPER MARIO 64 logo, then the head.
+230 -
+# Move the hand cursor around the head.
+40 stick 70 0
+40 stick 0 70
+40 stick -70 0
+40 stick 0 -70
+# Grab (hold A) and stretch the face in a few directions.
+30 A stick 50 30
+30 A stick -60 -30
+20 -
+40 stick 30 60
+30 A stick 0 -70
+30 A stick 70 0
+20 -
+40 stick -50 -20
+30 A stick -70 40
+30 A stick 40 -60
+20 -
+# Idle: the head relaxes and follows the cursor.
+60 stick 20 20
+60 -
+40 stick -40 0
+30 A stick 0 60
+30 A stick 60 -60
+60 -

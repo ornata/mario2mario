@@ -1,0 +1,174 @@
+# gameplay.rec: title -> file select -> intro -> castle grounds -> castle
+# lobby -> Bob-omb Battlefield painting -> ~70 s of movement in the level
+# (running, triple jump, long jump, punches, backflip, ground pound,
+# camera C-buttons/R). One record per controller poll (30/s). Compile
+# with: bazelisk run //tools:recgen -- tests/inputs/gameplay.txt tests/inputs/gameplay.rec
+#
+# Authored by replaying under //oracle:play --headless and inspecting
+# dumped frames; every step depends on the exact deterministic timing,
+# so edit only by appending, or re-verify the route afterwards.
+#
+# Title, START, file A, then the Peach/Lakitu intro.
+230 -
+4 START
+80 -
+4 A
+1400 -
+# Castle grounds: turn toward the castle, dismiss Lakitu's first dialog.
+100 stick 0 -80
+30 -
+4 A
+25 -
+4 A
+25 -
+4 A
+25 -
+4 A
+25 -
+# Walk to the bridge (nudge right around the tree), stop for the
+# Lakitu camera cutscene and page through it.
+60 stick 0 80
+14 stick 60 55
+110 stick 0 80
+90 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+# Straight through the castle doors; dismiss Bowser's message.
+220 stick 0 80
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+60 -
+# Into the lobby, over to the west wing, up the west stairs to the
+# star door, and into the Bob-omb Battlefield painting room.
+55 stick 0 -80
+60 -
+40 stick 0 80
+25 stick 80 0
+90 stick -80 0
+150 stick 0 80
+25 stick 80 0
+100 stick 0 80
+30 -
+# Jump into the painting, choose star 1.
+50 stick -30 80
+4 A stick -30 80
+25 stick -30 80
+4 A stick -30 80
+25 stick -30 80
+4 A stick -30 80
+30 stick -30 80
+150 -
+4 A
+200 -
+# --- in Bob-omb Battlefield: dismiss the Bob-omb Buddy dialog ---
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+4 A
+30 -
+# run forward, then a triple jump
+90 stick 0 80
+4 A stick 0 80
+10 stick 0 80
+4 A stick 0 80
+10 stick 0 80
+4 A stick 0 80
+60 stick 0 80
+# turn right and rotate the camera with the C buttons
+60 stick 80 0
+20 -
+4 CL
+40 -
+4 CR
+40 -
+# curve left while running
+90 stick -70 40
+# long jump: run, crouch (Z) and jump
+40 stick 0 80
+3 Z stick 0 80
+4 Z A stick 0 80
+40 stick 0 80
+# punches and a kick
+4 B
+20 -
+4 B
+20 -
+4 B
+40 -
+# run back and jump every so often
+60 stick 0 -80
+4 A stick 0 -80
+40 stick 0 -80
+4 A stick 0 -80
+40 stick 50 50
+4 A stick 50 50
+40 stick 50 50
+# crouch, backflip (Z held, A)
+20 Z
+4 Z A
+40 -
+# run a wide circle
+60 stick 80 0
+60 stick 60 -60
+60 stick 0 -80
+60 stick -60 -60
+60 stick -80 0
+60 stick -60 60
+60 stick 0 80
+60 stick 60 60
+# side-to-side with jumps
+4 A stick 80 0
+40 stick 80 0
+4 A stick -80 0
+40 stick -80 0
+4 A stick 80 0
+40 stick 80 0
+# camera look-around and zoom with R / C-up / C-down
+4 R
+30 -
+4 CU
+30 -
+4 CD
+30 -
+4 R
+30 -
+# ground pound (jump, then Z in the air)
+4 A
+10 -
+4 Z
+40 -
+# final run
+120 stick 0 80
+60 stick -80 0
+60 stick 0 -80
+60 -

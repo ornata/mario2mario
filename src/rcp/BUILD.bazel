@@ -1,3 +1,4 @@
+load("@rom//:defs.bzl", "ROM_PATH")
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
@@ -74,5 +75,59 @@ cc_binary(
         "//src/oracle",
         "//src/tools:z64",
         "@sdl2",
+    ],
+)
+
+# Frame equivalence at command-buffer level: replay a committed .rec and
+# compare every graphics task's display-list hash with a committed golden.
+# Needs no GL context; the ROM comes from $M2M_ROM (bazel/rom.bzl).
+cc_test(
+    name = "title_replay_test",
+    size = "medium",
+    srcs = ["replay_golden_test.c"],
+    args = [
+        "$(rootpath //tests/inputs:title.rec)",
+        "$(rootpath //tests/goldens:title.hashes)",
+        "600",
+        "--twice",
+    ],
+    data = [
+        "//tests/goldens:title.hashes",
+        "//tests/inputs:title.rec",
+    ],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":gfx",
+        ":input",
+        "//src/hw",
+        "//src/oracle",
+        "//src/tools:rom_env",
+        "//src/tools:z64",
+    ],
+)
+
+cc_test(
+    name = "gameplay_replay_test",
+    size = "large",
+    srcs = ["replay_golden_test.c"],
+    args = [
+        "$(rootpath //tests/inputs:gameplay.rec)",
+        "$(rootpath //tests/goldens:gameplay.hashes)",
+        "6300",
+    ],
+    data = [
+        "//tests/goldens:gameplay.hashes",
+        "//tests/inputs:gameplay.rec",
+    ],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":gfx",
+        ":input",
+        "//src/hw",
+        "//src/oracle",
+        "//src/tools:rom_env",
+        "//src/tools:z64",
     ],
 )
