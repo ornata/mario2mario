@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# Reject any staged blob that is an N64 ROM image.
+#
+# Checks the *staged* content (index blobs), never the working tree:
+#   (a) blob SHA1 of content equals the SM64 (USA) ROM SHA1, or
+#   (b) blob begins with a z64 / n64 / v64 header magic.
+# Install: git config core.hooksPath hooks
+set -eu
+
+ROM_SHA1=9bef1128717f958171a4afac3ed78ee2bb4e86ce
+ROM_SIZE=8388608
+
+fail=0
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+
+git diff --cached --name-only --diff-filter=ACMRT -z >"$tmp"
+
+while IFS= read -r -d '' path; do
+  blob=$(git rev-parse --verify --quiet ":$path" || true)
+  [ -n "$blob" ] || continue
+  [ "$(git cat-file -t "$blob")" = blob ] || continue
+
+  magic=$(git cat-file blob "$blob" | head -c 4 | od -An -tx1 | tr -d ' \n')
+  case "$magic" in
+  80371240 | 40123780 | 37804012)
+    echo "pre-commit: REJECTED '$path': N64 ROM header magic ($magic)" >&2
+    fail=1
+    ;;
+  esac
+
+  # Independent of the magic check. A SHA1 match implies an exact-size
+  # match, so only same-size blobs are hashed.
+  if [ "$(git cat-file -s "$blob")" -eq "$ROM_SIZE" ]; then
+    sum=$(git cat-file blob "$blob" | shasum -a 1 | cut -d' ' -f1)
+    if [ "$sum" = "$ROM_SHA1" ]; then
+      echo "pre-commit: REJECTED '$path': content SHA1 matches the ROM" >&2
+      fail=1
+    fi
+  fi
+done <"$tmp"
+
+if [ "$fail" -ne 0 ]; then
+  echo "pre-commit: ROM images must never be committed. Unstage them." >&2
+  exit 1
+fi
+exit 0

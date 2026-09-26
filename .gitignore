@@ -1,1 +1,16 @@
-rom/**
+# ROM images: must never enter git history (see hooks/pre-commit).
+rom/
+/mario64usa.z64
+*.z64
+*.n64
+*.v64
+
+# Bazel outputs.
+bazel-*
+/out/
+
+# Local build artifacts.
+*.o
+*.a
+*.dSYM/
+.DS_Store
