@@ -26,6 +26,7 @@
 
 #define BOOT_PC 0xA4000040u
 
-void boot_pif_hle(Oracle *o);
+/* Leaves `c` and `hw` in the post-PIF state. Shared by both engines. */
+void boot_pif_hle(CpuState *c, HwState *hw);
 
 #endif

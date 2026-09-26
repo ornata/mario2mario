@@ -62,7 +62,7 @@ static uint64_t *replay(const Z64Rom *rom, const char *rec_path,
   hw->hook_user = c;
   oracle_init(o, hw);
   o->entry_pc = rom->header.entry_pc;
-  boot_pif_hle(o);
+  boot_pif_hle(&o->cpu, o->hw);
   /* At most ~4 VI fields per frame even in heavy scenes; bail out well
    * past that so a regression cannot hang the test. */
   uint64_t limit = (uint64_t)frames * 8u * HW_VI_PERIOD + 400000000ull;

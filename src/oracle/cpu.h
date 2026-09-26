@@ -102,9 +102,18 @@ typedef enum {
   STOP_EXCEPTION, /* exception entered and stop_on_exception is set */
 } StopReason;
 
+/* Optional capture of every distinct (vaddr, instruction word) executed,
+ * with the icount of its first execution: an open-addressed hash set. */
+typedef struct {
+  uint64_t *keys;  /* vaddr << 32 | word, 0 = empty */
+  uint64_t *first; /* icount of first execution */
+  uint32_t n, cap;
+} ExecWords;
+
 typedef struct {
   CpuState cpu;
   HwState *hw;
+  ExecWords *exec_words; /* NULL unless capturing */
 
   /* Trace: one bit per RDRAM word that has executed. */
   uint8_t *exec_bits;
@@ -134,6 +143,10 @@ void oracle_free(Oracle *o);
 /* Runs until icount reaches `until` or execution stops; may be called
  * again to continue. */
 StopReason oracle_run(Oracle *o, uint64_t until);
+
+/* Records (vaddr, word) in the capture set (first execution wins). */
+void exec_words_add(ExecWords *e, uint32_t vaddr, uint32_t word,
+                    uint64_t icount);
 
 /* Enters the exception vector for `code` (EPC/BD from cur_pc/cur_delay).
  * `ce` is the coprocessor number for EXC_CPU. */

@@ -1,5 +1,7 @@
 #include "src/oracle/trace.h"
 
+#include <stdlib.h>
+
 static int executed(const Oracle *o, uint32_t word) {
   return (o->exec_bits[word >> 3] >> (word & 7u)) & 1u;
 }
@@ -38,4 +40,31 @@ void trace_write(FILE *f, const Oracle *o) {
     fprintf(f, "exec %08X %08X\n", 0x80000000u + start * 4,
             0x80000000u + i * 4);
   }
+}
+
+typedef struct {
+  uint32_t vaddr, word;
+  uint64_t first;
+} ExecWordRow;
+
+static int cmp_row(const void *a, const void *b) {
+  const ExecWordRow *x = a, *y = b;
+  if (x->vaddr != y->vaddr)
+    return x->vaddr < y->vaddr ? -1 : 1;
+  return x->first < y->first ? -1 : x->first > y->first;
+}
+
+void exec_words_write(FILE *f, const ExecWords *e) {
+  ExecWordRow *rows = malloc(sizeof(ExecWordRow) * (e->n ? e->n : 1));
+  uint32_t n = 0;
+  for (uint32_t i = 0; i < e->cap; i++)
+    if (e->keys[i]) {
+      uint64_t k = e->keys[i] == 1 ? 0 : e->keys[i];
+      rows[n++] = (ExecWordRow){(uint32_t)(k >> 32), (uint32_t)k, e->first[i]};
+    }
+  qsort(rows, n, sizeof(ExecWordRow), cmp_row);
+  for (uint32_t i = 0; i < n; i++)
+    fprintf(f, "%08X %08X %llX\n", rows[i].vaddr, rows[i].word,
+            (unsigned long long)rows[i].first);
+  free(rows);
 }

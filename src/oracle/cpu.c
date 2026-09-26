@@ -923,6 +923,44 @@ static int exec(Oracle *o, uint32_t w) {
   }
 }
 
+/* --- Executed-word capture ---------------------------------------------- */
+
+void exec_words_add(ExecWords *e, uint32_t vaddr, uint32_t word,
+                    uint64_t icount) {
+  uint64_t key = (uint64_t)vaddr << 32 | word;
+  if (!key)
+    key = 1; /* (0, nop) cannot be stored as 0 */
+  if (e->n * 2 >= e->cap) {
+    uint32_t old_cap = e->cap;
+    uint64_t *ok = e->keys, *of = e->first;
+    e->cap = old_cap ? old_cap * 2 : 1u << 16;
+    e->keys = calloc(e->cap, sizeof(uint64_t));
+    e->first = calloc(e->cap, sizeof(uint64_t));
+    e->n = 0;
+    for (uint32_t i = 0; i < old_cap; i++)
+      if (ok[i]) {
+        uint32_t h =
+            (uint32_t)(ok[i] * 0x9E3779B97F4A7C15ull >> 40) & (e->cap - 1);
+        while (e->keys[h])
+          h = (h + 1) & (e->cap - 1);
+        e->keys[h] = ok[i];
+        e->first[h] = of[i];
+        e->n++;
+      }
+    free(ok);
+    free(of);
+  }
+  uint32_t h = (uint32_t)(key * 0x9E3779B97F4A7C15ull >> 40) & (e->cap - 1);
+  while (e->keys[h]) {
+    if (e->keys[h] == key)
+      return;
+    h = (h + 1) & (e->cap - 1);
+  }
+  e->keys[h] = key;
+  e->first[h] = icount;
+  e->n++;
+}
+
 /* --- Run loop ----------------------------------------------------------- */
 
 static int interrupt_pending(Oracle *o) {
@@ -951,6 +989,7 @@ StopReason oracle_run(Oracle *o, uint64_t until) {
   CpuState *c = &o->cpu;
   HwState *hw = o->hw;
   o->stop = STOP_NONE; /* resumable: each call runs until the new limit */
+  fpu_sync_host(c);    /* host rounding mode follows FCR31 */
   while (o->stop == STOP_NONE) {
     if (c->icount >= until) {
       o->stop = STOP_BUDGET;
@@ -977,6 +1016,8 @@ StopReason oracle_run(Oracle *o, uint64_t until) {
     } else {
       w = phys_read32(o, pa);
     }
+    if (o->exec_words)
+      exec_words_add(o->exec_words, pc, w, c->icount);
     if (pc == o->entry_pc && !o->entry_icount)
       o->entry_icount = c->icount;
 

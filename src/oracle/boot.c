@@ -2,9 +2,7 @@
 
 #include <string.h>
 
-void boot_pif_hle(Oracle *o) {
-  CpuState *c = &o->cpu;
-  HwState *hw = o->hw;
+void boot_pif_hle(CpuState *c, HwState *hw) {
 
   uint32_t n = hw->rom_size < 0x1000u ? hw->rom_size : 0x1000u;
   memcpy(hw->sp_mem, hw->rom, n);
@@ -29,7 +27,6 @@ void boot_pif_hle(Oracle *o) {
   c->cop0[CP0_PRID] = 0x00000B22u;
   c->fcr0 = 0x00000A00u;
   c->fcr31 = 0;
-  fpu_sync_host(c);
 
   c->pc = BOOT_PC;
   c->next_pc = BOOT_PC + 4;

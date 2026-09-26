@@ -18,6 +18,10 @@
 
 void trace_write(FILE *f, const Oracle *o);
 
+/* Writes the executed-word capture, one `vaddr word first_icount` (hex)
+ * line per distinct pair, sorted by vaddr then first_icount. */
+void exec_words_write(FILE *f, const ExecWords *e);
+
 /* Number of executed RDRAM words. */
 uint32_t trace_exec_words(const Oracle *o);
 

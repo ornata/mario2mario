@@ -3,24 +3,36 @@ load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
+# CPU state layout, PIF-stage boot and the checkpoint hash: shared by the
+# oracle and the native runtime (no interpreter code).
 cc_library(
-    name = "oracle",
+    name = "state",
     srcs = [
         "boot.c",
         "checkpoint.c",
-        "cpu.c",
-        "fpu.c",
-        "trace.c",
     ],
     hdrs = [
         "boot.h",
         "checkpoint.h",
         "cpu.h",
-        "trace.h",
     ],
+    deps = ["//src/hw"],
+)
+
+cc_library(
+    name = "oracle",
+    srcs = [
+        "cpu.c",
+        "fpu.c",
+        "trace.c",
+    ],
+    hdrs = ["trace.h"],
     # fpu.c needs the host rounding mode and IEEE flags honoured exactly.
     copts = ["-ffp-model=strict"],
-    deps = ["//src/hw"],
+    deps = [
+        ":state",
+        "//src/hw",
+    ],
 )
 
 cc_binary(

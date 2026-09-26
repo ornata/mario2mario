@@ -249,7 +249,7 @@ int main(int argc, char **argv) {
   a->o = malloc(sizeof(Oracle));
   oracle_init(a->o, a->hw);
   a->o->entry_pc = rom.header.entry_pc;
-  boot_pif_hle(a->o);
+  boot_pif_hle(&a->o->cpu, a->o->hw);
 
   Uint64 t0 = SDL_GetPerformanceCounter(), hz = SDL_GetPerformanceFrequency();
   int quit = 0;

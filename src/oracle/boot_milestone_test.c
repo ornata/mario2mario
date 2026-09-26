@@ -45,7 +45,7 @@ static void boot(const Z64Rom *rom, HwState *hw, Oracle *o, FILE *ckpt,
   o->entry_pc = rom->header.entry_pc;
   o->checkpoints = ckpt;
   o->checkpoint_stride = 97;
-  boot_pif_hle(o);
+  boot_pif_hle(&o->cpu, o->hw);
   oracle_run(o, until);
 }
 

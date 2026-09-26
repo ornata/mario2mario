@@ -2,11 +2,13 @@
  *
  *   run [--rom PATH] [--max-insns N] [--trace PATH]
  *       [--checkpoints PATH] [--checkpoint-stride N] [--history N]
- *       [--replay F.rec] [--task-hashes F.txt]
+ *       [--replay F.rec] [--task-hashes F.txt] [--exec-words F.txt]
  *
  * --replay feeds controller polls from a .rec recording (src/rcp/input.h).
  * --task-hashes walks every graphics task's display list with the
  * GL-free Fast3D HLE and writes one hex dl_hash per line.
+ * --exec-words writes every distinct (vaddr, word) executed with the icount
+ * of its first execution (the translation pipeline's input).
  * --history N prints the last N (<= 256) executed PCs at the end.
  * --rom defaults to $M2M_ROM. Relative paths are resolved against the
  * directory bazel was invoked from. Prints a summary of milestones. */
@@ -56,7 +58,7 @@ static const char *const stop_names[] = {"none", "budget", "exception"};
 
 int main(int argc, char **argv) {
   const char *rom_path = getenv("M2M_ROM"), *trace_path = NULL,
-             *ckpt_path = NULL, *replay = NULL, *hashes = NULL;
+             *ckpt_path = NULL, *replay = NULL, *hashes = NULL, *ew_path = NULL;
   unsigned long long max_insns = 100000000ull, stride = 1;
   unsigned history = 0;
   for (int i = 1; i < argc; i += 2) {
@@ -79,18 +81,21 @@ int main(int argc, char **argv) {
       replay = v;
     else if (!strcmp(a, "--task-hashes"))
       hashes = v;
+    else if (!strcmp(a, "--exec-words"))
+      ew_path = v;
     else if (!strcmp(a, "--history"))
       history = (unsigned)strtoul(v, NULL, 0);
     else {
       fprintf(stderr,
               "usage: %s [--rom PATH] [--max-insns N] [--trace PATH] "
               "[--checkpoints PATH] [--checkpoint-stride N] [--history N] "
-              "[--replay F.rec] [--task-hashes F.txt]\n",
+              "[--replay F.rec] [--task-hashes F.txt] [--exec-words F.txt]\n",
               argv[0]);
       return 2;
     }
   }
-  char b1[4096], b2[4096], b3[4096], b4[4096], b5[4096];
+  char b1[4096], b2[4096], b3[4096], b4[4096], b5[4096], b6[4096];
+  ew_path = resolve(ew_path, b6, sizeof(b6));
   replay = resolve(replay, b4, sizeof(b4));
   hashes = resolve(hashes, b5, sizeof(b5));
   rom_path = resolve(rom_path, b1, sizeof(b1));
@@ -139,7 +144,10 @@ int main(int argc, char **argv) {
   hw->pad_hook = on_pad;
   hw->hook_user = hooks;
 
-  boot_pif_hle(o);
+  ExecWords ew = {0};
+  if (ew_path)
+    o->exec_words = &ew;
+  boot_pif_hle(&o->cpu, o->hw);
   clock_t t0 = clock();
   StopReason r = oracle_run(o, max_insns);
   double secs = (double)(clock() - t0) / CLOCKS_PER_SEC;
@@ -203,6 +211,17 @@ int main(int argc, char **argv) {
     }
     trace_write(f, o);
     fclose(f);
+  }
+  if (ew_path) {
+    FILE *f = fopen(ew_path, "w");
+    if (!f) {
+      perror(ew_path);
+      return 1;
+    }
+    exec_words_write(f, &ew);
+    fclose(f);
+    free(ew.keys);
+    free(ew.first);
   }
   if (o->checkpoints)
     fclose(o->checkpoints);
