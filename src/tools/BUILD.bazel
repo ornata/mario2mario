@@ -1,0 +1,32 @@
+load("@rom//:defs.bzl", "ROM_PATH")
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "z64",
+    srcs = ["z64.c"],
+    hdrs = ["z64.h"],
+)
+
+cc_library(
+    name = "rom_env",
+    testonly = True,
+    hdrs = ["rom_env.h"],
+    deps = [":z64"],
+)
+
+# Tests that read the ROM: it is not a Bazel input (it must never be in
+# git), so its absolute path arrives via $M2M_ROM and the result is not
+# cached ("external").
+cc_test(
+    name = "z64_test",
+    size = "small",
+    srcs = ["z64_test.c"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":rom_env",
+        ":z64",
+    ],
+)
