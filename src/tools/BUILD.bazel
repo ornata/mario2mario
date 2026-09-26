@@ -69,3 +69,29 @@ cc_test(
         ":z64",
     ],
 )
+
+cc_library(
+    name = "chunk",
+    srcs = ["chunk.c"],
+    hdrs = ["chunk.h"],
+    deps = [":mips"],
+)
+
+cc_binary(
+    name = "chunker",
+    srcs = ["chunker.c"],
+    deps = [
+        ":chunk",
+        ":mips",
+    ],
+)
+
+cc_test(
+    name = "chunker_test",
+    size = "small",
+    srcs = ["chunker_test.c"],
+    deps = [
+        ":chunk",
+        ":mips",
+    ],
+)

@@ -13,3 +13,9 @@ alias(
     name = "decoder_roundtrip_test",
     actual = "//src/tools:decoder_roundtrip_test",
 )
+
+#   bazelisk run //tools:chunker -- [--target N] <listing.txt>
+alias(
+    name = "chunker",
+    actual = "//src/tools:chunker",
+)
