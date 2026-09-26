@@ -1,0 +1,18 @@
+load("@rom//:defs.bzl", "ROM_PATH")
+
+# Publish-safety check: no ROM-derived content (runs of ROM words, raw ROM
+# bytes) in git-tracked files outside gen/, tests/goldens/, rom/, out/.
+# Scans the working tree, so it runs unsandboxed and on demand:
+#   bazelisk test //verify:publish_check
+sh_test(
+    name = "publish_check",
+    size = "medium",
+    srcs = ["publish_check.sh"],
+    data = ["publish_check.py"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = [
+        "external",
+        "local",
+        "manual",
+    ],
+)
