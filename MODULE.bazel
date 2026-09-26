@@ -1,0 +1,13 @@
+"""mario2mario: direct MIPS (N64) -> AArch64 (macOS) binary translation."""
+
+module(name = "mario2mario")
+
+bazel_dep(name = "rules_cc", version = "0.2.25")
+
+# TODO(phase 3): SDL2 from /opt/homebrew (sdl2-config) via new_local_repository
+# for window/input/GL output.
+
+# Absolute path of the (untracked) ROM image, for tests that read it.
+rom_path = use_repo_rule("//bazel:rom.bzl", "rom_path")
+
+rom_path(name = "rom")

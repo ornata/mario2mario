@@ -1,0 +1,21 @@
+# Host and target are Apple Silicon macOS.
+common --enable_bzlmod
+build --macos_cpus=arm64
+
+# C11, optimized, strict warnings.
+build --conlyopt=-std=c11
+build --copt=-O2
+build --copt=-Wall
+build --copt=-Wextra
+build --copt=-Wpedantic
+build --copt=-Wshadow
+build --copt=-Wstrict-prototypes
+build --copt=-Wmissing-prototypes
+build --copt=-Werror
+
+# The ROM is never a Bazel source (it must stay out of git). Tests get
+# its absolute path from @rom//:defs.bzl (see bazel/rom.bzl); override
+# with --repo_env=M2M_ROM=/abs/path.
+test --test_output=errors
+
+try-import %workspace%/user.bazelrc

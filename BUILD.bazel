@@ -1,0 +1,4 @@
+# Root package. Real targets live in per-directory packages:
+#   //src/tools   mechanical tooling (z64 parser, decoder, chunker)
+#   //tools       stable command-line names (aliases) for the tooling
+#   //bazel       Starlark helpers (ROM path repository rule)
