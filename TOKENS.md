@@ -9,3 +9,4 @@ experiment's headline number; everything else is scaffolding.
 |------|-------|-----------|-------|----------------------------------|
 | 2026-09-26 | 0: plan + bootstrap | interactive | claude-fable-5 (orchestrator) + claude-opus-5-5 (worker) | TBD (estimated) |
 | 2026-09-26 | 0–1: bootstrap + mechanical tooling (z64, decoder/listing, re-encoder, chunker) | subagent | claude-opus-5-5 | ~3.1M estimated: ~50K output + ~3.0M input (≈55 tool turns × ≈55K average context, mostly prompt-cache reads); basis: turn count × context-size snapshots, no harness count available |
+| 2026-09-26 | 2: hw model + oracle interpreter + PIF HLE/IPL3 boot + trace + milestone tests | subagent | claude-opus-5-5 | ~6.1M estimated: ~110K output + ~6.0M input (≈35 tool turns × ≈170K average context, mostly prompt-cache reads); basis: turn count × context-size snapshots, no harness count available |
