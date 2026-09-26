@@ -19,3 +19,9 @@ alias(
     name = "chunker",
     actual = "//src/tools:chunker",
 )
+
+#   bazelisk run //tools:recgen -- SCRIPT.txt OUT.rec
+alias(
+    name = "recgen",
+    actual = "//src/rcp:recgen",
+)

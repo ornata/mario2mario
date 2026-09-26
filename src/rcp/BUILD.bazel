@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -40,4 +40,24 @@ cc_library(
         ":gfx",
         "//third_party:gl",
     ],
+)
+
+cc_library(
+    name = "input",
+    srcs = ["input.c"],
+    hdrs = ["input.h"],
+    deps = ["//src/hw"],
+)
+
+cc_test(
+    name = "input_test",
+    size = "small",
+    srcs = ["input_test.c"],
+    deps = [":input"],
+)
+
+cc_binary(
+    name = "recgen",
+    srcs = ["recgen.c"],
+    deps = [":input"],
 )
