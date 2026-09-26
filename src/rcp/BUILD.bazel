@@ -3,6 +3,8 @@ load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["play.c"])
+
 # GL-free Fast3D display-list HLE and texture decoding.
 cc_library(
     name = "gfx",

@@ -8,3 +8,9 @@ alias(
     name = "run",
     actual = "//src/native:run",
 )
+
+#   bazelisk run //native:play -- [--replay F.rec] [--headless --frames N --png F]
+alias(
+    name = "play",
+    actual = "//src/native:play",
+)

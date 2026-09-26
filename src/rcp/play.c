@@ -1,4 +1,6 @@
-/* //oracle:play -- SM64 under the oracle interpreter in a real window.
+/* //oracle:play and //native:play -- SM64 in a real window, under the
+ * oracle interpreter or (built with M2M_NATIVE_ENGINE) the native
+ * runtime running translated code. Everything else is shared.
  *
  *   play [--rom PATH] [--scale N] [--record F.rec] [--replay F.rec]
  *        [--headless] [--frames N] [--png OUT.png]
@@ -24,6 +26,9 @@
 #include "src/hw/hw.h"
 #include "src/oracle/boot.h"
 #include "src/oracle/cpu.h"
+#ifdef M2M_NATIVE_ENGINE
+#include "src/native/native.h"
+#endif
 #include "src/rcp/gfx.h"
 #include "src/rcp/gl.h"
 #include "src/rcp/input.h"
@@ -32,7 +37,11 @@
 
 typedef struct {
   HwState *hw;
+#ifdef M2M_NATIVE_ENGINE
+  NativeState *ns;
+#else
   Oracle *o;
+#endif
   Gfx gfx;
   GlRenderer gl;
   SDL_Window *win;
@@ -213,8 +222,15 @@ int main(int argc, char **argv) {
   a->png_prefix = png_prefix;
   int w = 320 * scale, h = 240 * scale;
   a->win = SDL_CreateWindow(
-      "mario2mario (oracle)", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w,
-      h, SDL_WINDOW_OPENGL | (headless ? SDL_WINDOW_HIDDEN : SDL_WINDOW_SHOWN));
+
+#ifdef M2M_NATIVE_ENGINE
+      "mario2mario (native)"
+#else
+      "mario2mario (oracle)"
+#endif
+      ,
+      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h,
+      SDL_WINDOW_OPENGL | (headless ? SDL_WINDOW_HIDDEN : SDL_WINDOW_SHOWN));
   if (!a->win || !SDL_GL_CreateContext(a->win)) {
     fprintf(stderr, "window/GL: %s\n", SDL_GetError());
     return 1;
@@ -246,10 +262,18 @@ int main(int argc, char **argv) {
   a->hw->task_hook = on_task;
   a->hw->pad_hook = on_pad;
   a->hw->hook_user = a;
+#ifdef M2M_NATIVE_ENGINE
+  a->ns = malloc(sizeof(NativeState));
+  native_init(a->ns, a->hw);
+  a->ns->trap_log = "native_traps.txt";
+  CpuState *cpu = &a->ns->cpu;
+#else
   a->o = malloc(sizeof(Oracle));
   oracle_init(a->o, a->hw);
   a->o->entry_pc = rom.header.entry_pc;
-  boot_pif_hle(&a->o->cpu, a->o->hw);
+  CpuState *cpu = &a->o->cpu;
+#endif
+  boot_pif_hle(cpu, a->hw);
 
   Uint64 t0 = SDL_GetPerformanceCounter(), hz = SDL_GetPerformanceFrequency();
   int quit = 0;
@@ -261,8 +285,17 @@ int main(int argc, char **argv) {
         quit = 1;
     if (!headless)
       read_keyboard(a);
-    uint64_t field = a->o->cpu.icount / HW_VI_PERIOD + 1;
+    uint64_t field = cpu->icount / HW_VI_PERIOD + 1;
+#ifdef M2M_NATIVE_ENGINE
+    a->ns->budget = field * HW_VI_PERIOD;
+    if (native_run(a->ns) != NSTOP_BUDGET) {
+      fprintf(stderr, "native stop at %08X: %s\n", a->ns->stop_pc,
+              a->ns->stop_why ? a->ns->stop_why : "?");
+      break;
+    }
+#else
     oracle_run(a->o, field * HW_VI_PERIOD);
+#endif
     if (max_fields && field >= max_fields)
       break;
     if (headless) {
@@ -285,16 +318,20 @@ int main(int argc, char **argv) {
   printf("frames=%llu fields=%llu icount=%llu polls=%llu textures=%u "
          "wall=%.2fs\n",
          (unsigned long long)a->frames,
-         (unsigned long long)(a->o->cpu.icount / HW_VI_PERIOD),
-         (unsigned long long)a->o->cpu.icount,
-         (unsigned long long)a->input.polls, a->gfx.ntextures, secs);
+         (unsigned long long)(cpu->icount / HW_VI_PERIOD),
+         (unsigned long long)cpu->icount, (unsigned long long)a->input.polls,
+         a->gfx.ntextures, secs);
   if (a->task_hashes)
     fclose(a->task_hashes);
   gl_free(&a->gl);
   gfx_free(&a->gfx);
   rec_free(&rec_in);
   rec_free(&rec_out);
+#ifdef M2M_NATIVE_ENGINE
+  native_free(a->ns);
+#else
   oracle_free(a->o);
+#endif
   hw_free(a->hw);
   SDL_Quit();
   z64_close(&rom);

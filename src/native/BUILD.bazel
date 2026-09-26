@@ -75,3 +75,22 @@ cc_test(
         "//src/tools:mips",
     ],
 )
+
+# //native:play: the shared window/input/replay front end (src/rcp/play.c)
+# built against the native runtime instead of the oracle.
+cc_binary(
+    name = "play",
+    srcs = ["//src/rcp:play.c"],
+    defines = ["M2M_NATIVE_ENGINE"],
+    deps = [
+        ":runtime",
+        "//src/hw",
+        "//src/oracle",
+        "//src/rcp:gfx",
+        "//src/rcp:gl",
+        "//src/rcp:input",
+        "//src/rcp:png",
+        "//src/tools:z64",
+        "@sdl2",
+    ],
+)
