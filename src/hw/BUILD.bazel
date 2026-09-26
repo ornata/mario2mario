@@ -1,0 +1,19 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "hw",
+    srcs = ["hw.c"],
+    hdrs = [
+        "hw.h",
+        "timebase.h",
+    ],
+)
+
+cc_test(
+    name = "hw_test",
+    size = "small",
+    srcs = ["hw_test.c"],
+    deps = [":hw"],
+)
