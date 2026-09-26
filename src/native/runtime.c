@@ -237,15 +237,20 @@ static int run_matches(const NativeState *ns, uint32_t u, uint32_t first,
 static void link_run(NativeState *ns, uint32_t u, uint32_t first,
                      uint32_t end) {
   const M2mUnit *un = &m2m_units[u];
+  /* A delay-slot row (entry -1) is not an entry point: it never takes a
+   * word over from another unit, since the same instruction may also be
+   * translated as an ordinary entry elsewhere. */
   for (uint32_t i = first; i < end; i++) {
     uint32_t idx;
-    if (dispatch_index(un->rows[i].pc, &idx) && ns->unitmap[idx] &&
-        ns->unitmap[idx] != u + 1)
+    if (un->rows[i].entry >= 0 && dispatch_index(un->rows[i].pc, &idx) &&
+        ns->unitmap[idx] && ns->unitmap[idx] != u + 1)
       unlink_unit(ns, ns->unitmap[idx] - 1);
   }
   for (uint32_t i = first; i < end; i++) {
     uint32_t idx;
     if (!dispatch_index(un->rows[i].pc, &idx))
+      continue;
+    if (un->rows[i].entry < 0 && ns->unitmap[idx] && ns->unitmap[idx] != u + 1)
       continue;
     ns->unitmap[idx] = u + 1;
     if (idx < RDRAM_WORDS)

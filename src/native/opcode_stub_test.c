@@ -84,7 +84,13 @@ int main(void) {
       CpuState init;
       /* FP values in the format the instruction uses (NaN handling is
        * not part of the per-opcode check). */
-      int doubles = strstr(text, ".d") ? 1 : strstr(text, ".s") ? 0 : t & 1;
+      /* the source format is the mnemonic's last suffix (cvt.d.s reads
+       * a single) */
+      const char *sp = strchr(text, ' ');
+      size_t ml = sp ? (size_t)(sp - text) : strlen(text);
+      int doubles = ml >= 2 && text[ml - 2] == '.'
+                        ? (text[ml - 1] == 'd' || text[ml - 1] == 'l')
+                        : t & 1;
       random_state(&init, doubles);
       /* Memory instructions address the data window. */
       if (op != MIPS_OP_INVALID &&
