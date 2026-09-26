@@ -29,6 +29,8 @@ cc_binary(
     deps = [
         ":oracle",
         "//src/hw",
+        "//src/rcp:gfx",
+        "//src/rcp:input",
         "//src/tools:z64",
     ],
 )

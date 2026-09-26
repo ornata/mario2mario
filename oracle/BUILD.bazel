@@ -1,5 +1,6 @@
 # Stable command-line names for the oracle interpreter in //src/oracle.
 #   bazelisk run //oracle:run -- [--rom PATH] [--max-insns N] [--trace PATH]
+#                                [--replay F.rec] [--task-hashes F.txt]
 #                                [--checkpoints PATH] [--checkpoint-stride N]
 
 package(default_visibility = ["//visibility:public"])

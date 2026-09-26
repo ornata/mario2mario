@@ -2,7 +2,11 @@
  *
  *   run [--rom PATH] [--max-insns N] [--trace PATH]
  *       [--checkpoints PATH] [--checkpoint-stride N] [--history N]
+ *       [--replay F.rec] [--task-hashes F.txt]
  *
+ * --replay feeds controller polls from a .rec recording (src/rcp/input.h).
+ * --task-hashes walks every graphics task's display list with the
+ * GL-free Fast3D HLE and writes one hex dl_hash per line.
  * --history N prints the last N (<= 256) executed PCs at the end.
  * --rom defaults to $M2M_ROM. Relative paths are resolved against the
  * directory bazel was invoked from. Prints a summary of milestones. */
@@ -15,6 +19,8 @@
 #include "src/oracle/boot.h"
 #include "src/oracle/cpu.h"
 #include "src/oracle/trace.h"
+#include "src/rcp/gfx.h"
+#include "src/rcp/input.h"
 #include "src/tools/z64.h"
 
 static const char *resolve(const char *path, char *buf, size_t cap) {
@@ -25,11 +31,32 @@ static const char *resolve(const char *path, char *buf, size_t cap) {
   return buf;
 }
 
+typedef struct {
+  Gfx gfx;
+  InputState input;
+  FILE *hashes;
+} Hooks;
+
+static void on_task(void *user, HwState *hw, HwTaskRecord *r) {
+  Hooks *h = user;
+  if (!h->hashes || r->task[OSTASK_TYPE] != OSTASK_M_GFXTASK)
+    return;
+  gfx_run_task(&h->gfx, hw->rdram, r->task[OSTASK_DATA_PTR] & 0x1FFFFFFFu);
+  r->dl_hash = h->gfx.dl_hash;
+  fprintf(h->hashes, "%016llX\n", (unsigned long long)r->dl_hash);
+}
+
+static void on_pad(void *user, HwState *hw, unsigned port) {
+  Hooks *h = user;
+  if (h->input.replay)
+    input_pad_hook(&h->input, hw, port);
+}
+
 static const char *const stop_names[] = {"none", "budget", "exception"};
 
 int main(int argc, char **argv) {
   const char *rom_path = getenv("M2M_ROM"), *trace_path = NULL,
-             *ckpt_path = NULL;
+             *ckpt_path = NULL, *replay = NULL, *hashes = NULL;
   unsigned long long max_insns = 100000000ull, stride = 1;
   unsigned history = 0;
   for (int i = 1; i < argc; i += 2) {
@@ -48,17 +75,24 @@ int main(int argc, char **argv) {
       ckpt_path = v;
     else if (!strcmp(a, "--checkpoint-stride"))
       stride = strtoull(v, NULL, 0);
+    else if (!strcmp(a, "--replay"))
+      replay = v;
+    else if (!strcmp(a, "--task-hashes"))
+      hashes = v;
     else if (!strcmp(a, "--history"))
       history = (unsigned)strtoul(v, NULL, 0);
     else {
       fprintf(stderr,
               "usage: %s [--rom PATH] [--max-insns N] [--trace PATH] "
-              "[--checkpoints PATH] [--checkpoint-stride N] [--history N]\n",
+              "[--checkpoints PATH] [--checkpoint-stride N] [--history N] "
+              "[--replay F.rec] [--task-hashes F.txt]\n",
               argv[0]);
       return 2;
     }
   }
-  char b1[4096], b2[4096], b3[4096];
+  char b1[4096], b2[4096], b3[4096], b4[4096], b5[4096];
+  replay = resolve(replay, b4, sizeof(b4));
+  hashes = resolve(hashes, b5, sizeof(b5));
   rom_path = resolve(rom_path, b1, sizeof(b1));
   trace_path = resolve(trace_path, b2, sizeof(b2));
   ckpt_path = resolve(ckpt_path, b3, sizeof(b3));
@@ -86,6 +120,24 @@ int main(int argc, char **argv) {
     }
     o->checkpoint_stride = stride ? stride : 1;
   }
+
+  Hooks *hooks = calloc(1, sizeof(Hooks));
+  Rec rec = {0};
+  gfx_init(&hooks->gfx);
+  if (replay) {
+    if (!rec_load(&rec, replay)) {
+      fprintf(stderr, "%s: not a .rec file\n", replay);
+      return 1;
+    }
+    hooks->input.replay = &rec;
+  }
+  if (hashes && !(hooks->hashes = fopen(hashes, "w"))) {
+    perror(hashes);
+    return 1;
+  }
+  hw->task_hook = on_task;
+  hw->pad_hook = on_pad;
+  hw->hook_user = hooks;
 
   boot_pif_hle(o);
   clock_t t0 = clock();
@@ -154,6 +206,11 @@ int main(int argc, char **argv) {
   }
   if (o->checkpoints)
     fclose(o->checkpoints);
+  if (hooks->hashes)
+    fclose(hooks->hashes);
+  gfx_free(&hooks->gfx);
+  rec_free(&rec);
+  free(hooks);
   oracle_free(o);
   hw_free(hw);
   free(o);
