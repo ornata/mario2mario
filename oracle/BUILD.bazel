@@ -8,3 +8,10 @@ alias(
     name = "run",
     actual = "//src/oracle:run",
 )
+
+#   bazelisk run //oracle:play -- [--replay F.rec] [--record F.rec] [--scale N]
+#                                 [--headless --frames N --png OUT.png] [--fields N]
+alias(
+    name = "play",
+    actual = "//src/rcp:play",
+)

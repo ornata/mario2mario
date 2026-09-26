@@ -61,3 +61,18 @@ cc_binary(
     srcs = ["recgen.c"],
     deps = [":input"],
 )
+
+cc_binary(
+    name = "play",
+    srcs = ["play.c"],
+    deps = [
+        ":gfx",
+        ":gl",
+        ":input",
+        ":png",
+        "//src/hw",
+        "//src/oracle",
+        "//src/tools:z64",
+        "@sdl2",
+    ],
+)
