@@ -208,9 +208,24 @@ static void unlink_words(NativeState *ns, uint32_t first, uint32_t n) {
   }
 }
 
-static int unit_matches(const NativeState *ns, uint32_t u) {
+/* Rows [first, end) of unit u: a run of consecutive addresses. Runs are
+ * validated and linked independently, since one unit may pack code that
+ * reaches memory at different times (e.g. SP memory and RDRAM). */
+static void run_bounds(const M2mUnit *un, uint32_t slot, uint32_t *first,
+                       uint32_t *end) {
+  uint32_t a = slot, b = slot + 1;
+  while (a > 0 && un->rows[a - 1].pc + 4 == un->rows[a].pc)
+    a--;
+  while (b < un->n && un->rows[b - 1].pc + 4 == un->rows[b].pc)
+    b++;
+  *first = a;
+  *end = b;
+}
+
+static int run_matches(const NativeState *ns, uint32_t u, uint32_t first,
+                       uint32_t end) {
   const M2mUnit *un = &m2m_units[u];
-  for (uint64_t i = 0; i < un->n; i++) {
+  for (uint32_t i = first; i < end; i++) {
     uint32_t idx;
     if (!dispatch_index(un->rows[i].pc, &idx) ||
         word_at(ns, idx) != un->rows[i].word)
@@ -219,15 +234,16 @@ static int unit_matches(const NativeState *ns, uint32_t u) {
   return 1;
 }
 
-static void link_unit(NativeState *ns, uint32_t u) {
+static void link_run(NativeState *ns, uint32_t u, uint32_t first,
+                     uint32_t end) {
   const M2mUnit *un = &m2m_units[u];
-  for (uint64_t i = 0; i < un->n; i++) {
+  for (uint32_t i = first; i < end; i++) {
     uint32_t idx;
     if (dispatch_index(un->rows[i].pc, &idx) && ns->unitmap[idx] &&
         ns->unitmap[idx] != u + 1)
       unlink_unit(ns, ns->unitmap[idx] - 1);
   }
-  for (uint64_t i = 0; i < un->n; i++) {
+  for (uint32_t i = first; i < end; i++) {
     uint32_t idx;
     if (!dispatch_index(un->rows[i].pc, &idx))
       continue;
@@ -286,10 +302,13 @@ static void *resolve(NativeState *ns, uint32_t va) {
       hi = mid;
   }
   for (uint32_t i = lo; i < ns->npcs && ns->pc_sorted[i] == va; i++) {
-    uint32_t u = ns->pc_index[i];
-    if (m2m_units[u].rows[ns->pc_slot[i]].entry < 0 || !unit_matches(ns, u))
+    uint32_t u = ns->pc_index[i], first, end;
+    if (m2m_units[u].rows[ns->pc_slot[i]].entry < 0)
       continue;
-    link_unit(ns, u);
+    run_bounds(&m2m_units[u], ns->pc_slot[i], &first, &end);
+    if (!run_matches(ns, u, first, end))
+      continue;
+    link_run(ns, u, first, end);
     return ns->dispatch[idx];
   }
   char origin[256];
@@ -312,6 +331,22 @@ RtRet rt_dispatch(NativeState *ns, uint64_t va, uint64_t b, uint32_t pcds) {
   (void)pcds;
   void *code = resolve(ns, (uint32_t)va);
   return (RtRet){(uint64_t)(uintptr_t)code, code == NULL};
+}
+
+RtRet rt_missing(NativeState *ns, uint64_t va, uint64_t b, uint32_t pcds);
+RtRet rt_missing(NativeState *ns, uint64_t va, uint64_t b, uint32_t pcds) {
+  (void)b;
+  (void)pcds;
+  if (ns->trap_log) {
+    FILE *f = fopen(ns->trap_log, "a");
+    if (f) {
+      fprintf(f, "%08X missing-path icount=%llu\n", (uint32_t)va,
+              (unsigned long long)ns->cpu.icount);
+      fclose(f);
+    }
+  }
+  stop(ns, NSTOP_UNTRANSLATED, (uint32_t)va, "path not in the translated set");
+  return (RtRet){0, 1};
 }
 
 RtRet rt_link(NativeState *ns, uint64_t va, uint64_t b, uint32_t pcds);

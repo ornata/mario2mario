@@ -150,6 +150,7 @@ else `0`. They are defined in the runtime; just invoke them.
 | `M2M_MTC0 reg, pc, ds` | x0 = value | — | |
 | `M2M_TLB op, pc` | — | — | op: tlbr 1, tlbwi 2, tlbwr 6, tlbp 8 |
 | `M2M_ERET pc` | — | never returns | count before it |
+| `M2M_MISSING pc` | — | never returns | a path not in the translated set (§7.2) |
 | `M2M_RAISE code, pc, ds` | — | never returns | syscall 8, break 9, overflow 12, trap 13 |
 | `M2M_CU1 pc, ds` | — | — | COP1 usable check (no FPR access) |
 | `M2M_COP1 pc, ds` | — | — | COP1 usable + FPR access check |
@@ -280,6 +281,12 @@ L_<B+4>:  // delay slot (ds = 1)
 Lnt_<B>:
     M2M_FALL 0x<B+8>
 ```
+
+If the delay slot address of a branch-likely is **not in the unit**, the taken
+path was never observed: translate the branch as above but make the taken
+side `M2M_MISSING 0x<B+4>` instead of the delay slot group and the goto (the
+not-taken side is unchanged). Do this only for branch-likely; for any other
+branch or jump whose delay slot is not in the unit: UNTRANSLATABLE.
 
 ### 7.3 Linking branches (`bltzal bgezal bltzall bgezall`)
 

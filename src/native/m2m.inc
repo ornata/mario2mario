@@ -318,6 +318,15 @@
     b     _m2m_redirect
 .endm
 
+// A path the capture never executed (e.g. the taken side of a
+// branch-likely whose delay slot is not in the unit): the runtime logs
+// `pc` as untranslated and stops. Never falls through.
+.macro M2M_MISSING pc
+    ldr   w0, =\pc
+    bl    _m2m_t_missing
+    b     _m2m_redirect
+.endm
+
 // Raise exception `code` for the instruction at pc (syscall 8, break 9,
 // reserved 10, overflow 12, trap 13). Never falls through.
 .macro M2M_RAISE code, pc, ds

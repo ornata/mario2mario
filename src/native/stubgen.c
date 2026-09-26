@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
       char *c = strstr(g, "//");
       char mnem[24] = "", word[9] = "";
       if (c && c < q)
-        sscanf(c, "// %*8s %8s %23s", word, mnem);
+        sscanf(c, "// %*[0-9A-F]: %8s %23s", word, mnem);
       int skip =
           !mnem[0] || contains(g, q, "M2M_GOTO") || contains(g, q, "M2M_FALL");
       for (int k = 0; skip_mnemonics[k]; k++)

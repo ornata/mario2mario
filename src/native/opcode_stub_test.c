@@ -95,7 +95,10 @@ int main(void) {
       }
       for (uint32_t i = 0; i < 4096; i++)
         hwo->rdram[WINDOW + i] = hwn->rdram[WINDOW + i] = (uint8_t)rnd();
-      hw_put_be32(hwo->rdram + (st->pc & 0x7FFFFFu), st->word);
+      if (((st->pc & 0x1FFFFFFFu) & 0xFFFFE000u) == 0x04000000u)
+        hw_put_be32(hwo->sp_mem + (st->pc & 0x1FFFu), st->word);
+      else
+        hw_put_be32(hwo->rdram + (st->pc & 0x7FFFFFu), st->word);
 
       o->cpu = init;
       o->cpu.pc = st->pc;
