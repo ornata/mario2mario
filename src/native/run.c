@@ -6,10 +6,12 @@
  * Mirrors //oracle:run: same boot, hardware model, input replay and hash
  * outputs, so checkpoint streams and task-hash files are byte-comparable.
  * Exit status: 0 budget reached, 3 untranslated code reached (logged to
- * --trap-log, default native_traps.txt), 4 outside the contract. */
+ * --trap-log, default out/native_traps.txt, git-ignored), 4 outside the
+ * contract. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include <time.h>
 
 #include "src/hw/hw.h"
@@ -50,7 +52,7 @@ static const char *resolve(const char *path, char *buf, size_t cap) {
 
 int main(int argc, char **argv) {
   const char *rom_path = getenv("M2M_ROM"), *ckpt = NULL, *replay = NULL,
-             *hashes = NULL, *traps = "native_traps.txt";
+             *hashes = NULL, *traps = "out/native_traps.txt";
   unsigned long long max_insns = 100000000ull, stride = 1;
   for (int i = 1; i + 1 < argc; i += 2) {
     const char *a = argv[i], *v = argv[i + 1];
@@ -83,6 +85,12 @@ int main(int argc, char **argv) {
   replay = resolve(replay, b[2], sizeof(b[2]));
   hashes = resolve(hashes, b[3], sizeof(b[3]));
   traps = resolve(traps, b[4], sizeof(b[4]));
+  if (!strncmp(traps + strlen(traps) - strlen("out/native_traps.txt"),
+               "out/native_traps.txt", strlen("out/native_traps.txt"))) {
+    char dir[4096];
+    snprintf(dir, sizeof(dir), "%.*s", (int)(strlen(traps) - 17), traps);
+    mkdir(dir, 0755); /* default location: create out/ if needed */
+  }
   if (!rom_path) {
     fprintf(stderr, "no ROM: pass --rom or set M2M_ROM\n");
     return 2;

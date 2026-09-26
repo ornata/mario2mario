@@ -14,3 +14,6 @@ bazel-*
 *.a
 *.dSYM/
 .DS_Store
+
+# Pipeline scratch: remaining-unit list (regenerated).
+gen/work/todo.txt

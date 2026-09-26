@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "src/hw/hw.h"
 #include "src/oracle/boot.h"
@@ -265,7 +266,13 @@ int main(int argc, char **argv) {
 #ifdef M2M_NATIVE_ENGINE
   a->ns = malloc(sizeof(NativeState));
   native_init(a->ns, a->hw);
-  a->ns->trap_log = "native_traps.txt";
+  static char trap_path[4096];
+  const char *wd = getenv("BUILD_WORKING_DIRECTORY");
+  snprintf(trap_path, sizeof(trap_path), "%s/out", wd && *wd ? wd : ".");
+  mkdir(trap_path, 0755);
+  strncat(trap_path, "/native_traps.txt",
+          sizeof(trap_path) - strlen(trap_path) - 1);
+  a->ns->trap_log = trap_path; /* out/ is git-ignored */
   CpuState *cpu = &a->ns->cpu;
 #else
   a->o = malloc(sizeof(Oracle));
