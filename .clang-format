@@ -1,0 +1,10 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+ColumnLimit: 80
+IndentWidth: 2
+PointerAlignment: Right
+AlignConsecutiveMacros: true
+AllowShortFunctionsOnASingleLine: Empty
+SortIncludes: true
+...
