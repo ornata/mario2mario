@@ -101,3 +101,12 @@ cc_binary(
     srcs = ["codemap.c"],
     deps = [":mips"],
 )
+
+cc_binary(
+    name = "unitrender",
+    srcs = ["unitrender.c"],
+    deps = [
+        ":chunk",
+        ":mips",
+    ],
+)

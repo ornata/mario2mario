@@ -31,3 +31,9 @@ alias(
     name = "codemap",
     actual = "//src/tools:codemap",
 )
+
+#   bazelisk run //tools:unitrender -- RUNS_DIR OUT_DIR
+alias(
+    name = "unitrender",
+    actual = "//src/tools:unitrender",
+)
