@@ -1,0 +1,17 @@
+# System libraries used by the graphics/input runtime.
+#
+# OpenGL: the macOS OpenGL framework, used as a GL 2.1 (legacy profile)
+# context -- deprecated by Apple but present on Apple Silicon (backed by
+# Metal). The runtime needs only GLSL 1.20 shaders, VBO-less client
+# arrays and FBOs, so 2.1 suffices; GL_SILENCE_DEPRECATION keeps the
+# deprecation warnings from failing -Werror builds.
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+exports_files(["sdl2.BUILD"])
+
+cc_library(
+    name = "gl",
+    defines = ["GL_SILENCE_DEPRECATION"],
+    linkopts = ["-framework OpenGL"],
+    visibility = ["//visibility:public"],
+)

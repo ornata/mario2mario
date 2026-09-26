@@ -4,8 +4,19 @@ module(name = "mario2mario")
 
 bazel_dep(name = "rules_cc", version = "0.2.25")
 
-# TODO(phase 3): SDL2 from /opt/homebrew (sdl2-config) via new_local_repository
-# for window/input/GL output.
+# SDL2 (window, input, GL context) from Homebrew, as reported by
+# `sdl2-config --cflags --libs`. OpenGL comes from the macOS framework
+# (//third_party:gl).
+new_local_repository = use_repo_rule(
+    "@bazel_tools//tools/build_defs/repo:local.bzl",
+    "new_local_repository",
+)
+
+new_local_repository(
+    name = "sdl2",
+    build_file = "//third_party:sdl2.BUILD",
+    path = "/opt/homebrew/opt/sdl2",
+)
 
 # Absolute path of the (untracked) ROM image, for tests that read it.
 rom_path = use_repo_rule("//bazel:rom.bzl", "rom_path")
