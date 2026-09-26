@@ -1,0 +1,44 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files(["m2m.inc"])
+
+cc_library(
+    name = "headers",
+    hdrs = ["native.h"],
+    deps = [
+        "//src/hw",
+        "//src/oracle:state",
+    ],
+)
+
+# Runtime: entry/exit glue, trampolines and C services. Links against the
+# translated units in //gen:units.
+cc_library(
+    name = "runtime",
+    srcs = [
+        "entry.s",
+        "runtime.c",
+    ],
+    textual_hdrs = ["m2m.inc"],
+    deps = [
+        ":headers",
+        "//gen:units",
+        "//src/hw",
+        "//src/oracle:state",
+    ],
+)
+
+cc_binary(
+    name = "run",
+    srcs = ["run.c"],
+    deps = [
+        ":runtime",
+        "//src/hw",
+        "//src/oracle:state",
+        "//src/rcp:gfx",
+        "//src/rcp:input",
+        "//src/tools:z64",
+    ],
+)

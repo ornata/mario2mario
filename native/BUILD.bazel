@@ -1,0 +1,10 @@
+# Stable command-line names for the native runtime in //src/native.
+#   bazelisk run //native:run -- [--max-insns N] [--checkpoints F]
+#       [--checkpoint-stride N] [--replay F.rec] [--task-hashes F] [--trap-log F]
+
+package(default_visibility = ["//visibility:public"])
+
+alias(
+    name = "run",
+    actual = "//src/native:run",
+)
