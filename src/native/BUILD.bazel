@@ -1,3 +1,4 @@
+load("@rom//:defs.bzl", "ROM_PATH")
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
@@ -92,5 +93,26 @@ cc_binary(
         "//src/rcp:png",
         "//src/tools:z64",
         "@sdl2",
+    ],
+)
+
+# Pilot lockstep (Phase 4a exit criterion): native vs oracle over the first
+# 200M instructions of gameplay.rec. ROM via $M2M_ROM (bazel/rom.bzl).
+cc_test(
+    name = "pilot_lockstep_test",
+    size = "medium",
+    srcs = ["pilot_lockstep_test.c"],
+    args = ["$(rootpath //tests/inputs:gameplay.rec)"],
+    data = ["//tests/inputs:gameplay.rec"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":runtime",
+        "//src/hw",
+        "//src/oracle",
+        "//src/rcp:gfx",
+        "//src/rcp:input",
+        "//src/tools:rom_env",
+        "//src/tools:z64",
     ],
 )
