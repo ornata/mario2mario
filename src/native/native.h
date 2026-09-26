@@ -22,18 +22,22 @@
 #include "src/hw/hw.h"
 #include "src/oracle/cpu.h"
 
-/* One translated unit (from gen/registry.c). */
+/* One translated unit, as each gen/units/unit_<id>.s file describes itself in the
+ * __DATA,__m2m_units section (no generated registry). */
 typedef struct {
-  const char *id;
-  uint32_t n;             /* MIPS instructions present in the unit */
-  const uint32_t *pcs;    /* their virtual addresses, ascending */
-  const uint32_t *words;  /* expected instruction words */
+  uint32_t pc, word; /* MIPS address and expected instruction word */
+  int32_t entry;     /* code offset of L_<pc>, or -1 (delay slot) */
+} M2mUnitRow;
+
+typedef struct {
   const uint8_t *code;    /* unit start symbol */
-  const int32_t *entries; /* per pc: offset from code, or -1 (delay slot) */
+  const M2mUnitRow *rows; /* one per MIPS instruction, ascending pc */
+  uint64_t n;
 } M2mUnit;
 
-extern const M2mUnit m2m_units[];
-extern const uint32_t m2m_unit_count;
+/* Units linked into this binary (section start .. end). */
+extern const M2mUnit *m2m_units;
+extern uint32_t m2m_unit_count;
 
 typedef enum {
   NSTOP_NONE = 0,

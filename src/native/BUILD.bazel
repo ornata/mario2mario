@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -20,8 +20,11 @@ cc_library(
     srcs = [
         "entry.s",
         "runtime.c",
+        "units_section.s",
     ],
     textual_hdrs = ["m2m.inc"],
+    # The (possibly empty) __m2m_units section must exist for the linker's
+    # section$start/end symbols; an empty descriptor section is provided.
     deps = [
         ":headers",
         "//gen:units",
@@ -40,5 +43,35 @@ cc_binary(
         "//src/rcp:gfx",
         "//src/rcp:input",
         "//src/tools:z64",
+    ],
+)
+
+cc_binary(
+    name = "stubgen",
+    srcs = ["stubgen.c"],
+)
+
+genrule(
+    name = "stubs",
+    srcs = ["//gen:unit_sources"],
+    outs = ["stubs.s"],
+    cmd = "$(location :stubgen) $@ $(SRCS)",
+    tools = [":stubgen"],
+)
+
+# Phase 5.1 per-opcode check: one translated group per opcode form vs the
+# oracle over fixed-seed random states. Grows with gen/units coverage.
+cc_test(
+    name = "opcode_stub_test",
+    size = "small",
+    srcs = [
+        "opcode_stub_test.c",
+        ":stubs",
+    ],
+    deps = [
+        ":runtime",
+        "//src/hw",
+        "//src/oracle",
+        "//src/tools:mips",
     ],
 )

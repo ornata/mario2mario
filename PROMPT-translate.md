@@ -16,17 +16,26 @@ Rules that are never broken:
 - Use only what this document defines. If an instruction (or situation) is not
   covered, or you are unsure, do **not** guess: output the UNTRANSLATABLE form
   (§12).
-- Pure text output in the exact format of §11. No commentary outside it.
+- Output exactly the two files of §11.
 
 ---
 
 ## 1. Input
 
+Your unit input file looks like:
+
 ```
 UNIT <id>
+WRITE gen/units/unit_<id>.s and gen/units/unit_<id>.json
+=== LISTING ===
 <listing lines: "ADDR  HEXWORD  mnemonic operands">
 --- gap ---                        (optional: separates runs)
 <more listing lines>
+=== HEADER (copy verbatim to the top of the .s file) ===
+<header lines>
+=== FOOTER (copy verbatim to the end of the .s file) ===
+<footer lines>
+=== END ===
 ```
 
 The unit contains **exactly** the listed addresses. A branch or jump target is
@@ -39,7 +48,8 @@ $t0-$t7 $s0-$s7 $t8 $t9 $k0 $k1 $gp $sp $fp $ra`), FPRs are `$f0..$f31`, COP0
 registers are named (`$Status`, `$Cause`, `$EPC`, `$Count`, `$Compare`, ...),
 FPU control registers are `$fcr0`/`$fcr31`. Immediates are hex (signed
 immediates may be negative: `-0x18`). Branch/jump operands are **absolute
-target addresses**. `nop` is `sll $zero, $zero, 0`.
+target addresses**. `nop` is `sll $zero, $zero, 0`. A line may read
+`.word 0xXXXXXXXX` (not an instruction): UNTRANSLATABLE.
 
 ## 2. Machine state and register contract
 
@@ -389,27 +399,25 @@ register: UNTRANSLATABLE.)
 
 ## 10. Forbidden
 
-`x18`, `sp`, `bl`, `blr`, `br`, `ret`, `svc`, numeric labels, any directive
-(`.text`, `.globl`, `.section`, `.align`, `.set`, ...), host calls of any kind
-other than the macros, literals via anything but `ldr xN, =value` /
-`mov`/`movz`/`movk`.
+Inside the groups: `x18`, `sp`, `bl`, `blr`, `br`, `ret`, `svc`, numeric
+labels, any directive (`.text`, `.globl`, `.section`, `.align`, `.set`, ...),
+host calls of any kind other than the macros, literals via anything but
+`ldr xN, =value` / `mov`/`movz`/`movk`. (The header and footer you copy are the
+only directives in the file.)
 
-## 11. Output format
+## 11. Output
 
-```
-<<<ASM
-<the groups, in listing order>
-ASM>>>
-<<<PROVENANCE
-{"unit": "<id>", "pcs": ["<ADDR>", "<ADDR>", ...]}
-PROVENANCE>>>
-```
+Write exactly two files and nothing else:
 
-`pcs` lists every translated address in order (all of them).
+1. `gen/units/unit_<id>.s`: the HEADER lines verbatim, then all groups in
+   listing order, then the FOOTER lines verbatim.
+2. `gen/units/unit_<id>.json`: `{"unit": "<id>", "pcs": ["<ADDR>", ...]}`
+   listing every translated address in order (all of them).
 
 ## 12. UNTRANSLATABLE
 
-If any instruction cannot be translated under this contract, output only:
+If any instruction cannot be translated under this contract, write no files
+and answer only:
 
 ```
 UNTRANSLATABLE <ADDR>: <one-line reason>

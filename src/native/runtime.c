@@ -42,6 +42,13 @@ void m2m_redirect(void);
 
 #define RDRAM_WORDS (HW_RDRAM_SIZE / 4u)
 
+/* Unit descriptors: every unit object contributes one M2mUnit to this
+ * Mach-O section; the linker provides its bounds. */
+extern const M2mUnit m2m_sect_start __asm("section$start$__DATA$__m2m_units");
+extern const M2mUnit m2m_sect_end __asm("section$end$__DATA$__m2m_units");
+const M2mUnit *m2m_units;
+uint32_t m2m_unit_count;
+
 /* ---- small helpers ---------------------------------------------------- */
 
 static void stop(NativeState *ns, NativeStop why, uint32_t pc,
@@ -181,9 +188,9 @@ static uint32_t word_at(const NativeState *ns, uint32_t idx) {
 
 static void unlink_unit(NativeState *ns, uint32_t u) {
   const M2mUnit *un = &m2m_units[u];
-  for (uint32_t i = 0; i < un->n; i++) {
+  for (uint64_t i = 0; i < un->n; i++) {
     uint32_t idx;
-    if (!dispatch_index(un->pcs[i], &idx) || ns->unitmap[idx] != u + 1)
+    if (!dispatch_index(un->rows[i].pc, &idx) || ns->unitmap[idx] != u + 1)
       continue;
     ns->unitmap[idx] = 0;
     ns->dispatch[idx] = (void *)m2m_lazy;
@@ -203,9 +210,10 @@ static void unlink_words(NativeState *ns, uint32_t first, uint32_t n) {
 
 static int unit_matches(const NativeState *ns, uint32_t u) {
   const M2mUnit *un = &m2m_units[u];
-  for (uint32_t i = 0; i < un->n; i++) {
+  for (uint64_t i = 0; i < un->n; i++) {
     uint32_t idx;
-    if (!dispatch_index(un->pcs[i], &idx) || word_at(ns, idx) != un->words[i])
+    if (!dispatch_index(un->rows[i].pc, &idx) ||
+        word_at(ns, idx) != un->rows[i].word)
       return 0;
   }
   return 1;
@@ -213,22 +221,22 @@ static int unit_matches(const NativeState *ns, uint32_t u) {
 
 static void link_unit(NativeState *ns, uint32_t u) {
   const M2mUnit *un = &m2m_units[u];
-  for (uint32_t i = 0; i < un->n; i++) {
+  for (uint64_t i = 0; i < un->n; i++) {
     uint32_t idx;
-    if (dispatch_index(un->pcs[i], &idx) && ns->unitmap[idx] &&
+    if (dispatch_index(un->rows[i].pc, &idx) && ns->unitmap[idx] &&
         ns->unitmap[idx] != u + 1)
       unlink_unit(ns, ns->unitmap[idx] - 1);
   }
-  for (uint32_t i = 0; i < un->n; i++) {
+  for (uint64_t i = 0; i < un->n; i++) {
     uint32_t idx;
-    if (!dispatch_index(un->pcs[i], &idx))
+    if (!dispatch_index(un->rows[i].pc, &idx))
       continue;
     ns->unitmap[idx] = u + 1;
     if (idx < RDRAM_WORDS)
       ns->codemap[idx] = 1;
-    ns->dispatch[idx] = un->entries[i] < 0
+    ns->dispatch[idx] = un->rows[i].entry < 0
                             ? (void *)m2m_lazy
-                            : (void *)(un->code + un->entries[i]);
+                            : (void *)(un->code + un->rows[i].entry);
   }
   ns->links++;
 }
@@ -279,7 +287,7 @@ static void *resolve(NativeState *ns, uint32_t va) {
   }
   for (uint32_t i = lo; i < ns->npcs && ns->pc_sorted[i] == va; i++) {
     uint32_t u = ns->pc_index[i];
-    if (m2m_units[u].entries[ns->pc_slot[i]] < 0 || !unit_matches(ns, u))
+    if (m2m_units[u].rows[ns->pc_slot[i]].entry < 0 || !unit_matches(ns, u))
       continue;
     link_unit(ns, u);
     return ns->dispatch[idx];
@@ -696,14 +704,16 @@ void native_init(NativeState *ns, HwState *hw) {
   ns->codemap = calloc(RDRAM_WORDS + 1, 1);
   ns->unitmap = calloc(NATIVE_DISPATCH_ENTRIES, sizeof(uint32_t));
 
+  m2m_units = &m2m_sect_start;
+  m2m_unit_count = (uint32_t)(&m2m_sect_end - &m2m_sect_start);
   uint32_t total = 0;
   for (uint32_t u = 0; u < m2m_unit_count; u++)
-    total += m2m_units[u].n;
+    total += (uint32_t)m2m_units[u].n;
   PcRow *rows = malloc(sizeof(PcRow) * (total ? total : 1));
   uint32_t n = 0;
   for (uint32_t u = 0; u < m2m_unit_count; u++)
-    for (uint32_t i = 0; i < m2m_units[u].n; i++)
-      rows[n++] = (PcRow){m2m_units[u].pcs[i], u, i};
+    for (uint32_t i = 0; i < (uint32_t)m2m_units[u].n; i++)
+      rows[n++] = (PcRow){m2m_units[u].rows[i].pc, u, i};
   qsort(rows, n, sizeof(PcRow), cmp_pcrow);
   ns->npcs = n;
   ns->pc_sorted = malloc(sizeof(uint32_t) * (n ? n : 1));

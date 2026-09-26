@@ -46,7 +46,9 @@
     b.lo  9001f
     ldr   w0, =\pc
     bl    _m2m_t_boundary
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9001:
 .endm
 
@@ -59,7 +61,9 @@
     ccmp  x28, x17, #2, ne
     b.lo  9002f
     bl    _m2m_t_boundary
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9002:
 .endm
 
@@ -118,7 +122,9 @@
     mov   w16, #1
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_read
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9011:
 .endm
 
@@ -135,7 +141,9 @@
     mov   w16, #2
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_read
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9013:
 .endm
 
@@ -152,7 +160,9 @@
     mov   w16, #4
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_read
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9015:
 .endm
 
@@ -169,7 +179,9 @@
     mov   w16, #8
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_read
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9017:
 .endm
 
@@ -190,7 +202,9 @@
 9020:
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_write8
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9021:
 .endm
 
@@ -210,7 +224,9 @@
 9022:
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_write16
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9023:
 .endm
 
@@ -230,7 +246,9 @@
 9024:
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_write32
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9025:
 .endm
 
@@ -250,7 +268,9 @@
 9026:
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_write64
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9027:
 .endm
 
@@ -264,7 +284,9 @@
     mov   w16, #\reg
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_mfc0
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 .endm
 
 // x0 -> COP0 register `reg` (pass the sign-extended low word for mtc0,
@@ -273,7 +295,9 @@
     mov   w16, #\reg
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_mtc0
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 .endm
 
 // tlbr (1), tlbwi (2), tlbwr (6), tlbp (8).
@@ -281,7 +305,9 @@
     mov   w16, #\op
     ldr   w17, =(\pc)
     bl    _m2m_t_tlb
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 .endm
 
 // eret: returns through the runtime (boundary included). Never falls
@@ -342,7 +368,9 @@
     cbz   x17, 9032f
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_fpu
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 9032:
 .endm
 
@@ -352,7 +380,9 @@
     mov   w16, #\fs
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_cfc1
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 .endm
 
 .macro M2M_CTC1 fs, pc, ds
@@ -360,5 +390,7 @@
     mov   w16, #\fs
     ldr   w17, =(\pc + \ds)
     bl    _m2m_t_ctc1
-    cbnz  x16, _m2m_redirect
+    cbz   x16, 9099f
+    b     _m2m_redirect
+9099:
 .endm
