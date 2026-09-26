@@ -1,3 +1,4 @@
+load("@rom//:defs.bzl", "ROM_PATH")
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
@@ -43,3 +44,17 @@ cc_test(
     ],
 )
 
+# Boots the real ROM (path via $M2M_ROM, see bazel/rom.bzl); not cached.
+cc_test(
+    name = "boot_milestone_test",
+    size = "small",
+    srcs = ["boot_milestone_test.c"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+    deps = [
+        ":oracle",
+        "//src/hw",
+        "//src/tools:rom_env",
+        "//src/tools:z64",
+    ],
+)
