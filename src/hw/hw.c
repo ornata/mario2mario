@@ -122,6 +122,9 @@ static void sp_start_task(HwState *hw) {
   else if (size > HW_RDRAM_SIZE - ptr)
     size = HW_RDRAM_SIZE - ptr;
   r->data_hash = hw_hash_be_words(hw->rdram + ptr, size);
+  r->dl_hash = 0;
+  if (hw->task_hook)
+    hw->task_hook(hw->hook_user, hw, r);
   hw->sp_done_at = hw->now + HW_SP_TASK_LATENCY;
   recompute_next_event(hw);
 }
@@ -270,7 +273,7 @@ static void joybus_command(HwState *hw, unsigned channel, const uint8_t *tx,
     return;
   uint8_t cmd = tx[0];
   if (channel < 4) {
-    const HwPad *p = &hw->pad[channel];
+    HwPad *p = &hw->pad[channel];
     if (!p->present) {
       *rx_len_byte |= 0x80; /* no response */
       return;
@@ -280,6 +283,8 @@ static void joybus_command(HwState *hw, unsigned channel, const uint8_t *tx,
       rx[1] = 0x00;
       rx[2] = 0x02; /* no pak */
     } else if (cmd == 0x01 && rxn >= 4) {
+      if (hw->pad_hook)
+        hw->pad_hook(hw->hook_user, hw, channel);
       rx[0] = (uint8_t)(p->buttons >> 8);
       rx[1] = (uint8_t)p->buttons;
       rx[2] = (uint8_t)p->stick_x;

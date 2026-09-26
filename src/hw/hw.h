@@ -187,9 +187,22 @@ typedef struct {
   uint64_t icount;
   uint32_t task[OSTASK_WORDS]; /* OSTask words as read from DMEM */
   uint64_t data_hash;          /* hash of RDRAM[data_ptr, +data_size) */
+  uint64_t dl_hash; /* full display-list stream hash, set by the RCP HLE
+                       task hook for graphics tasks (0 if none) */
 } HwTaskRecord;
 
-typedef struct {
+typedef struct HwState HwState;
+
+/* Optional runtime hooks (NULL when unused):
+ * task_hook runs when an RSP task starts, after it is logged; the
+ * graphics HLE walks the display list here and may set r->dl_hash.
+ * pad_hook runs before the PIF answers a controller-read command for
+ * `port`, so the runtime can fill hw->pad[port] (live input or a
+ * recorded .rec stream). */
+typedef void (*HwTaskHook)(void *user, HwState *hw, HwTaskRecord *r);
+typedef void (*HwPadHook)(void *user, HwState *hw, unsigned port);
+
+struct HwState {
   uint8_t rdram[HW_RDRAM_SIZE];
   uint8_t sp_mem[HW_SP_MEM_SIZE];
   uint8_t pif_ram[HW_PIF_RAM_SIZE];
@@ -224,7 +237,11 @@ typedef struct {
   HwTaskRecord *task_log;
   uint32_t task_count, task_cap;
   uint64_t vi_count, si_reads, si_writes, ai_buffers, unmapped_accesses;
-} HwState;
+
+  HwTaskHook task_hook;
+  HwPadHook pad_hook;
+  void *hook_user;
+};
 
 /* Allocates nothing large inside: `hw` itself holds RDRAM (allocate it on
  * the heap). `rom` must stay mapped for the lifetime of `hw`. */
