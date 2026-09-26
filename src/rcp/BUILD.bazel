@@ -131,3 +131,42 @@ cc_test(
         "//src/tools:z64",
     ],
 )
+
+cc_binary(
+    name = "pngdiff",
+    srcs = ["pngdiff.c"],
+    deps = [":png"],
+)
+
+# Pixel-level check of the OpenGL backend against committed golden frames
+# (tolerance compare). Needs WindowServer for the GL context: tagged manual
+# and local; run with `bazelisk test //src/rcp:golden_image_test`.
+sh_test(
+    name = "golden_image_test",
+    size = "medium",
+    srcs = ["golden_image_test.sh"],
+    args = [
+        "$(rootpath :play)",
+        "$(rootpath :pngdiff)",
+        "$(rootpath //tests/inputs:title.rec)",
+        "400",
+        "$(rootpath //tests/goldens:title_0400.png)",
+        "$(rootpath //tests/inputs:gameplay.rec)",
+        "4500",
+        "$(rootpath //tests/goldens:gameplay_4500.png)",
+    ],
+    data = [
+        ":play",
+        ":pngdiff",
+        "//tests/goldens:gameplay_4500.png",
+        "//tests/goldens:title_0400.png",
+        "//tests/inputs:gameplay.rec",
+        "//tests/inputs:title.rec",
+    ],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = [
+        "external",
+        "local",
+        "manual",
+    ],
+)
