@@ -1,0 +1,10 @@
+# Stable command-line names for the oracle interpreter in //src/oracle.
+#   bazelisk run //oracle:run -- [--rom PATH] [--max-insns N] [--trace PATH]
+#                                [--checkpoints PATH] [--checkpoint-stride N]
+
+package(default_visibility = ["//visibility:public"])
+
+alias(
+    name = "run",
+    actual = "//src/oracle:run",
+)

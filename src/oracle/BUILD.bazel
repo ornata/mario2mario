@@ -1,21 +1,35 @@
-load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name = "oracle",
     srcs = [
+        "boot.c",
         "checkpoint.c",
         "cpu.c",
         "fpu.c",
+        "trace.c",
     ],
     hdrs = [
+        "boot.h",
         "checkpoint.h",
         "cpu.h",
+        "trace.h",
     ],
     # fpu.c needs the host rounding mode and IEEE flags honoured exactly.
     copts = ["-ffp-model=strict"],
     deps = ["//src/hw"],
+)
+
+cc_binary(
+    name = "run",
+    srcs = ["run.c"],
+    deps = [
+        ":oracle",
+        "//src/hw",
+        "//src/tools:z64",
+    ],
 )
 
 cc_test(
@@ -28,3 +42,4 @@ cc_test(
         "//src/tools:mips",
     ],
 )
+
