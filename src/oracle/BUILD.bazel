@@ -1,0 +1,30 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "oracle",
+    srcs = [
+        "checkpoint.c",
+        "cpu.c",
+        "fpu.c",
+    ],
+    hdrs = [
+        "checkpoint.h",
+        "cpu.h",
+    ],
+    # fpu.c needs the host rounding mode and IEEE flags honoured exactly.
+    copts = ["-ffp-model=strict"],
+    deps = ["//src/hw"],
+)
+
+cc_test(
+    name = "opcode_test",
+    size = "small",
+    srcs = ["opcode_test.c"],
+    deps = [
+        ":oracle",
+        "//src/hw",
+        "//src/tools:mips",
+    ],
+)
