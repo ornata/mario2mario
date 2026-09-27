@@ -101,11 +101,42 @@ cc_binary(
 cc_test(
     name = "pilot_lockstep_test",
     size = "medium",
-    srcs = ["pilot_lockstep_test.c"],
-    args = ["$(rootpath //tests/inputs:gameplay.rec)"],
+    srcs = ["lockstep_test.c"],
+    args = [
+        "$(rootpath //tests/inputs:gameplay.rec)",
+        "200000000",
+    ],
     data = ["//tests/inputs:gameplay.rec"],
     env = {"M2M_ROM": ROM_PATH},
     tags = ["external"],
+    deps = [
+        ":runtime",
+        "//src/hw",
+        "//src/oracle",
+        "//src/rcp:gfx",
+        "//src/rcp:input",
+        "//src/tools:rom_env",
+        "//src/tools:z64",
+    ],
+)
+
+# The full gameplay.rec route (10B instructions, as captured by
+# gen/work/regenerate.sh): every executed unit, byte-identical to the oracle.
+cc_test(
+    name = "full_route_lockstep_test",
+    size = "enormous",
+    srcs = ["lockstep_test.c"],
+    args = [
+        "$(rootpath //tests/inputs:gameplay.rec)",
+        "10000000000",
+    ],
+    data = ["//tests/inputs:gameplay.rec"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = [
+        "external",
+        "large",
+        "long",
+    ],
     deps = [
         ":runtime",
         "//src/hw",

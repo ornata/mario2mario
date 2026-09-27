@@ -1,5 +1,5 @@
-/* Pilot lockstep: the native engine (LLM-translated units) against the
- * oracle over the first 200M instructions of gameplay.rec. Requires
+/* Lockstep: the native engine (LLM-translated units) against the oracle
+ * over the first BUDGET instructions of gameplay.rec (argv[2]). Requires
  * byte-identical checkpoint streams (stride 1000, src/oracle/checkpoint.h)
  * and identical graphics-task display-list hash sequences. */
 #include <stdio.h>
@@ -15,9 +15,8 @@
 #include "src/tools/rom_env.h"
 #include "src/tools/z64.h"
 
-#define BUDGET    200000000ull
 #define STRIDE    1000u
-#define MAX_TASKS 4096u
+#define MAX_TASKS 16384u
 
 typedef struct {
   Gfx gfx;
@@ -58,10 +57,11 @@ static char *slurp(FILE *f, long *n) {
 }
 
 int main(int argc, char **argv) {
-  if (argc < 2) {
-    fprintf(stderr, "usage: %s gameplay.rec\n", argv[0]);
+  if (argc < 3) {
+    fprintf(stderr, "usage: %s gameplay.rec budget\n", argv[0]);
     return 2;
   }
+  const uint64_t BUDGET = strtoull(argv[2], NULL, 0);
   Z64Rom rom;
   if (!rom_env_open(&rom))
     return 1;
