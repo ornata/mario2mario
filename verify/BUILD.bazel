@@ -35,3 +35,16 @@ sh_test(
     env = {"M2M_ROM": ROM_PATH},
     tags = ["external"],
 )
+
+# ROM-history guard: scans every object in the repository's git store.
+sh_test(
+    name = "rom_history",
+    size = "small",
+    srcs = ["rom_history.sh"],
+    data = ["rom_history.py"],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = [
+        "external",
+        "local",
+    ],
+)
