@@ -1,0 +1,61 @@
+# LLM-emitted translation units live in gen/units/unit_<id>.s (+ .json).
+# They are derivative of the ROM, so this public repository ships none:
+# regenerate them from your own ROM by following PROMPT.md (the worker
+# contract is PROMPT-translate.md). With no units, //native:run and
+# //native:play build and trap at the first untranslated instruction.
+#
+# Kept here: the accounting tables and pipeline recipes of the reference
+# run, which contain no ROM content (checked by //verify:publish_check):
+# worker_ledger.tsv, coverage.tsv, provenance.tsv, batching_trial.tsv,
+# trial/sonnet_trial.tsv, trial-sonnet55/ledger.tsv, work/*.sh.
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "units",
+    srcs = glob(
+        ["units/*.s"],
+        allow_empty = True,
+    ),
+    textual_hdrs = ["//src/native:m2m.inc"],
+    # Nothing references a unit by name: keep every object in the link.
+    alwayslink = True,
+)
+
+filegroup(
+    name = "unit_sources",
+    srcs = glob(
+        ["units/*.s"],
+        allow_empty = True,
+    ),
+)
+
+# Inputs of the translation-dependent verify tests (//verify:provenance,
+# //verify:coverage); present only after regeneration.
+filegroup(
+    name = "unit_listings",
+    srcs = glob(
+        ["work/**/*.in.txt"],
+        allow_empty = True,
+    ),
+)
+
+filegroup(
+    name = "coverage_inputs",
+    srcs = ["work/coverage.sh"] + glob(
+        [
+            "work/exec_words_full.txt",
+            "worker_ledger.tsv",
+        ],
+        allow_empty = True,
+    ),
+)
+
+filegroup(
+    name = "provenance_selftest_data",
+    srcs = glob(
+        ["trial/opus_divergence3/*.s"],
+        allow_empty = True,
+    ),
+)

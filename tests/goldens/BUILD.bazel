@@ -3,4 +3,14 @@ package(default_visibility = ["//visibility:public"])
 # Golden graphics-task display-list hash streams (one hex hash per line)
 # and golden frames, regenerated with //oracle:run --task-hashes and
 # //oracle:play --headless --png.
-exports_files(glob(["*.hashes", "*.png"]))
+exports_files(glob(["*.hashes"]))
+
+# Golden frames are rendered game images (ROM-derived) and are not shipped;
+# //src/rcp:golden_image_test explains how to regenerate them locally.
+filegroup(
+    name = "frames",
+    srcs = glob(
+        ["*.png"],
+        allow_empty = True,
+    ),
+)

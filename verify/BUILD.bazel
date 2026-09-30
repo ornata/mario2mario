@@ -1,19 +1,22 @@
 load("@rom//:defs.bzl", "ROM_PATH")
 
 # Publish-safety check: no ROM-derived content (runs of ROM words, raw ROM
-# bytes) in git-tracked files outside gen/, tests/goldens/, rom/, out/.
-# Scans the working tree, so it runs unsandboxed and on demand:
-#   bazelisk test //verify:publish_check
+# bytes) in any git-tracked file or in any blob of the git history, except
+# the line-anchored allowlist of deliberate excerpts
+# (verify/publish_allowlist.tsv). Reads the repository, so it runs
+# unsandboxed.
 sh_test(
     name = "publish_check",
     size = "medium",
     srcs = ["publish_check.sh"],
-    data = ["publish_check.py"],
+    data = [
+        "publish_allowlist.tsv",
+        "publish_check.py",
+    ],
     env = {"M2M_ROM": ROM_PATH},
     tags = [
         "external",
         "local",
-        "manual",
     ],
 )
 
@@ -33,7 +36,10 @@ sh_test(
         "//gen:unit_sources",
     ],
     env = {"M2M_ROM": ROM_PATH},
-    tags = ["external"],
+    tags = [
+        "external",
+        "manual",
+    ],
 )
 
 # Coverage ledger as a test: 0 executed pairs of the full route uncovered.
@@ -45,6 +51,7 @@ sh_test(
         "//gen:coverage_inputs",
         "//gen:unit_sources",
     ],
+    tags = ["manual"],
 )
 
 # ROM-history guard: scans every object in the repository's git store.
@@ -60,10 +67,24 @@ sh_test(
     ],
 )
 
-# The verification suite (PLAN.md): lockstep + provenance + coverage
-# ledger + ROM-history guard, plus the per-opcode stub harness.
+# The publishable-repository checks: they need only the ROM, not the
+# translated units.
+test_suite(
+    name = "public",
+    tests = [
+        ":publish_check",
+        ":rom_history",
+    ],
+)
+
+# The full verification suite (PLAN.md): lockstep + provenance + coverage
+# ledger + ROM-history guard, plus the per-opcode stub harness. Needs the
+# translated units in gen/units/, regenerated per PROMPT.md.
 test_suite(
     name = "all",
+    # manual: otherwise //... would expand this suite and run its
+    # translation-dependent members.
+    tags = ["manual"],
     tests = [
         ":coverage",
         ":provenance",

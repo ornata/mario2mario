@@ -12,6 +12,11 @@ set -eu
 PLAY="$1"; PNGDIFF="$2"; shift 2
 while [ $# -ge 3 ]; do
   rec="$1"; frames="$2"; golden="$3"; shift 3
+  if [ ! -f "$golden" ]; then
+    echo "golden frame $golden is not in this repository: rendered game frames are" >&2
+    echo "ROM-derived and not shipped. Regenerate it from your own ROM (command above)." >&2
+    exit 1
+  fi
   out="$TEST_TMPDIR/$(basename "$golden")"
   "$PLAY" --headless --scale 1 --replay "$rec" --frames "$frames" --png "$out"
   echo "$golden vs frame $frames:"

@@ -62,6 +62,8 @@ genrule(
 
 # Phase 5.1 per-opcode check: one translated group per opcode form vs the
 # oracle over fixed-seed random states. Grows with gen/units coverage.
+# Needs the translated units in gen/units/ (not shipped: ROM-derived; regenerate
+# per PROMPT.md), so it is manual in the public repository.
 cc_test(
     name = "opcode_stub_test",
     size = "small",
@@ -69,6 +71,7 @@ cc_test(
         "opcode_stub_test.c",
         ":stubs",
     ],
+    tags = ["manual"],
     deps = [
         ":runtime",
         "//src/hw",
@@ -97,6 +100,8 @@ cc_binary(
 )
 
 # Pilot lockstep (Phase 4a exit criterion): native vs oracle over the first
+# Needs the translated units in gen/units/ (not shipped: ROM-derived; regenerate
+# per PROMPT.md), so it is manual in the public repository.
 # 200M instructions of gameplay.rec. ROM via $M2M_ROM (bazel/rom.bzl).
 cc_test(
     name = "pilot_lockstep_test",
@@ -108,7 +113,7 @@ cc_test(
     ],
     data = ["//tests/inputs:gameplay.rec"],
     env = {"M2M_ROM": ROM_PATH},
-    tags = ["external"],
+    tags = ["external", "manual"],
     deps = [
         ":runtime",
         "//src/hw",
@@ -133,6 +138,7 @@ cc_test(
     data = ["//tests/inputs:gameplay.rec"],
     env = {"M2M_ROM": ROM_PATH},
     tags = [
+        "manual",
         "external",
         "large",
         "long",
