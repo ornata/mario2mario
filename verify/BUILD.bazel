@@ -36,6 +36,17 @@ sh_test(
     tags = ["external"],
 )
 
+# Coverage ledger as a test: 0 executed pairs of the full route uncovered.
+sh_test(
+    name = "coverage",
+    size = "small",
+    srcs = ["coverage.sh"],
+    data = [
+        "//gen:coverage_inputs",
+        "//gen:unit_sources",
+    ],
+)
+
 # ROM-history guard: scans every object in the repository's git store.
 sh_test(
     name = "rom_history",
@@ -46,5 +57,18 @@ sh_test(
     tags = [
         "external",
         "local",
+    ],
+)
+
+# The verification suite (PLAN.md): lockstep + provenance + coverage
+# ledger + ROM-history guard, plus the per-opcode stub harness.
+test_suite(
+    name = "all",
+    tests = [
+        ":coverage",
+        ":provenance",
+        ":rom_history",
+        "//src/native:full_route_lockstep_test",
+        "//src/native:opcode_stub_test",
     ],
 )
