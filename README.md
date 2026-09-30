@@ -10,6 +10,8 @@ The question is, is it actually reasonably feasible to just let the LLM handle t
 * ~A weekend "one shot" project
 * Little to no intervention by an expert human
 
+also half the text in this repo is shameless claude slop because this is basically a shitpost so like, i dunno man
+
 ## What this repository is
 
 This is the source, the full commit history and the results of one run of that experiment.
@@ -37,18 +39,14 @@ verification suite.
   unit was written against.
 - **[PLAN.md](PLAN.md)**: the original plan.
 
-## What was deliberately removed, and why
+## Stuff not included:
 
-No game content is published here. The following were stripped from the entire git
-history, not just from the latest commit:
+- any actual translated AArch64 could be considered a ROM derivitave, so it is not included.
+- images of game frames
+- the ROM
 
-- **`gen/units/`, `gen/work/` and the trial outputs.** These are the translated AArch64
-  and the listings it was written from. Translated output is a derivative of the ROM, so it
-  stays with whoever owns the ROM.
-- **`tests/goldens/*.png`.** These are rendered frames of the game. The golden
-  display-list hash files (`*.hashes`) remain; they contain only hashes.
-- **The ROM itself.** It was never committed. A pre-commit hook blocks it, and
-  `//verify:rom_history` proves that no ROM-like blob exists anywhere in history.
+You can use this repo as a reference to recreate the experiment, which isn't too hard with a
+modern LLM.
 
 The history keeps its original commits and messages, including the commits that only
 touched removed files; those are now empty. The accounting tables the report cites are
