@@ -1,4 +1,191 @@
-# mario2mario: Phase 4b report
+# mario2mario: report
+
+## The question and the answer
+
+**Question** (README.md): how hard is it for an LLM to translate a compiled binary
+directly from one platform to another, with no specialized tools and no decompilation?
+
+**Answer (reference run: Super Mario 64 USA, N64 MIPS R4300i → Apple Silicon macOS AArch64).**
+It can be done, at the scale of a full game route, and the result can be checked by
+machine. LLM workers translated every CPU instruction that the recorded gameplay route
+executes, instruction by instruction:
+- 107,154 distinct executed code words;
+- 535 units;
+- 107,172 translated MIPS instructions.
+
+The native binary is byte-identical to an independently written reference interpreter
+over 10 billion instructions of gameplay: every checkpoint of the architectural state and
+every graphics display list match. It plays the route live in a window at 60 fields/s on
+about a quarter of one core.
+
+What it cost:
+- about 27.6M exact translation-worker tokens, plus about 8.9M estimated for calls killed
+  by usage limits;
+- about 115M tokens in all, including scaffolding and orchestration.
+
+What fought back: not the ISA itself, but a handful of recipe details (delay-slot
+fallthroughs, scratch registers clobbered by runtime calls, encodability of immediates)
+and one oracle timing bug.
+
+**Model sensitivity.**
+- claude-opus-5-5 was essentially reliable: 100% of first attempts validated, and 99.4%
+  were lockstep-correct.
+- claude-sonnet-5 was not: 10.7% validated.
+- claude-sonnet-5-5 matched Opus on a small trial: 20/20.
+
+## Architecture in brief
+
+One hardware model (`src/hw`), shared byte-for-byte by two engines:
+- `src/oracle`: a MIPS R4300i interpreter written from scratch in this repo, the test
+  oracle.
+- `src/native`: a runtime plus the LLM-written AArch64 in `gen/units/*.s`. Units link
+  lazily and are content-keyed. Indirect jumps go through a flat per-physical-word
+  dispatch table, and untranslated code traps.
+
+`src/rcp` provides Fast3D display-list HLE → OpenGL, keyboard → controller, and `.rec`
+replay. `src/tools` holds only mechanical bookkeeping: the z64 parser, a bijective
+decoder/listing/re-encoder, the chunker, `codemap` and `unitrender`. A deterministic
+timebase (`src/hw/timebase.h`) and a shared checkpoint format (`src/oracle/checkpoint.h`)
+make the two engines' streams byte-comparable.
+
+**What was translated vs HLE'd.**
+- **Translated:** all MIPS CPU code the route executes, including the ROM's own IPL3, the
+  OS exception handler at `0x80000180` and the thread scheduler. The TLB-refill vector is never
+  executed on this route (the oracle takes 0 TLB exceptions), so it is not translated.
+- **HLE'd:**
+  - PIF boot state (seeded from the documented CIC/PIF values; IPL3 itself runs
+    translated);
+  - the RSP: graphics display lists go through the Fast3D HLE, and audio tasks are
+    acknowledged;
+  - AI output is silent.
+- The RSP microcode is a different processor and was out of scope.
+
+## Phase history
+
+- **Phases 0–1: bootstrap and mechanical tooling.**
+  - ROM guard: `.gitignore`, a pre-commit hook, and the later `//verify:rom_history`.
+  - Bazel via bazelisk; clang-format.
+  - A table-driven R4300i decoder, proven bijective by re-encoding the whole ROM; a
+    chunker.
+- **Phase 2: hardware model and oracle.**
+  - A flat `HwState`/`CpuState`: full integer ISA, FPU, COP0, a 32-entry TLB, exceptions
+    and interrupts, and a deterministic Count.
+  - Boot uses PIF HLE, then the real IPL3.
+  - Finding that became normative: SM64 does use TLB-mapped addresses (segment 4 through
+    `osMapTLB`), so both engines must implement the same TLB, not a KSEG mask.
+- **Phase 3: graphics and input.**
+  - Fast3D HLE → OpenGL (SDL2); `.rec` record/replay; `//oracle:play`.
+  - Title and gameplay recordings, with task-hash and golden-image tests.
+  - The game was playable under the oracle.
+- **Phase 4a: runtime and translation pilot.**
+  - Built: the native runtime, the macros and trampolines, the executed-word capture, the
+    `codemap`/`unitrender` renderers and the per-opcode stub harness.
+  - The first worker mechanism, an automated `claude -p` driver script, was blocked by a
+    safety classifier. The user chose harness subagents (the Agent tool) instead. No
+    automated model loop was built after that.
+  - The pilot translated 100 units and ran lockstep over the first 200M instructions.
+- **The oracle-bug story (divergence #1, icount 25,152,136).**
+  - The first lockstep divergence was not a translation error. The oracle did not treat
+    the exception vector as a block boundary after entering an interrupt.
+  - The native runtime, which follows the normative sampling rule, was right.
+  - The oracle was fixed (`cec7c38`), and the spec wording was tightened.
+  - This validated the design: the oracle and the contract are independent artifacts, and
+    lockstep finds bugs in either.
+- **Contract freeze** (`1e25877`, after the pilot): `PROMPT-translate.md`, about 4K words.
+- **Phase 4b: full coverage.**
+  - The batching trial chose 10 units per call (267 tokens per instruction, against 472
+    at 1 per call).
+  - Units were translated in route order, in waves of about 8 calls.
+  - Contract gaps were solved structurally: branch/delay-slot pairs split across units were
+    re-rendered, and a branch into a delay slot was handled by splitting a unit.
+  - There were six usage-limit cuts, each recovered from disk and the ledger.
+  - A three-arm model trial ran, and two late divergences were localized and fixed (#3 and
+    #4 below).
+  - The phase ended at full coverage and a byte-identical 10B-instruction route.
+- **Phase 5/7: verification and deliverables.**
+  - Provenance verifier, coverage test, ROM-history guard and `//verify:all`.
+  - `PROMPT.md` (the reproduction prompt, with v2 contract errata).
+  - This report. The demo video is recorded separately, with the user.
+
+## Boundary statement: allowed and forbidden knowledge
+
+- **Allowed** (and used): publicly documented architecture knowledge held by the model.
+  That is the MIPS R4300i ISA and its encodings, the N64 memory map, RCP register
+  behaviour, and the Fast3D display-list command formats.
+- **Forbidden** (and not used):
+  - third-party tools: no disassembler, emulator, recompiler or decomp project;
+  - game-specific knowledge: no symbol maps, function databases or decomp source;
+  - decompilation of any kind.
+- **Tool inventory.** Everything that touches the ROM was written in this repo: the z64
+  parser, decoder, re-encoder, chunker, codemap, unitrender, stubgen, oracle, runtime,
+  rcp and verify scripts. The outside pieces are only generic ones: clang (C compiler and
+  integrated assembler), Bazel, SDL2, OpenGL, Python 3 (for scripts) and git.
+- **Workers saw only the contract and their unit's listing.** A listing is mechanical
+  decoder output: address, word and mnemonic. The Read/Write tool restriction enforced
+  this, and the workers' transcripts are in the session logs.
+- **ROM derivative.** `gen/` is ROM-derived: it stays local and is never published.
+  `//verify:publish_check` reports 17 deliberate short excerpts, in the decoder golden test
+  and the contract's worked examples, and nothing else.
+
+## Evidence of no decompilation (`//verify:provenance`)
+
+`bazelisk test //verify:provenance` checks every unit in `gen/units/` against its footer
+table, its rendered listing and the ROM, using only the MIPS encoding and the contract's
+macro vocabulary. Per-unit counts are in `gen/provenance.tsv`. It checks:
+- **source order:** one `L_<pc>` label per footer row, in listing order;
+- **bounded ranges:** each MIPS instruction maps to at most 24 AArch64 instructions (the
+  largest is 18);
+- **address-derived labels:** every label is address-derived, and local branches stay
+  inside their instruction's range;
+- **no code motion:** each range retires exactly once, and every memory, COP0, COP1, FPU,
+  TLB and RAISE macro names its own instruction's pc, with the delay-slot flag correct;
+- **CFG isomorphism:** each instruction's emitted edges equal the MIPS CFG decoded
+  independently from the word;
+- **words:** every provenance word equals the footer, the listing and a contiguous run of
+  ROM words.
+
+Output of the final run:
+
+```
+provenance: 535 units, 107172 MIPS instructions, 3927 ROM runs; checks: order,
+bounded (<= 24), labels, motion, cfg, words; 0 unit(s) failing
+```
+
+Every one of the 3,927 runs of consecutive translated words is found contiguously in the
+ROM. Its mutation self-test, run in the same target, catches all 10 injected defects:
+- the real divergence-#3 output;
+- a retargeted branch;
+- reordered labels;
+- two cases of code motion: swapped instruction bodies, and a memory access hoisted across
+  an instruction boundary;
+- a non-address label;
+- an escaping local branch;
+- altered provenance and footer words;
+- an oversized range.
+
+`bazelisk test //verify:all` runs the whole suite green: full-route lockstep, provenance,
+coverage, rom_history and the opcode stubs.
+
+## Token accounting (all phases; detail in `TOKENS.md`)
+
+| component | tokens | basis |
+|---|---|---|
+| translation workers, claude-opus-5-5 | 25,616,823 exact + ~7.4M est. | harness `subagent_tokens` per call; killed calls estimated at the exact 292.3 tok/instr |
+| translation workers, claude-sonnet-5 (trial) | 779,443 exact + ~1.5M est. | same; killed calls at its exact 364.6 tok/instr |
+| translation workers, claude-sonnet-5-5 (trial, side measurement) | 1,159,529 exact | CLI JSON, final-turn context (same quantity) |
+| **translation subtotal** | **27,555,795 exact + ~8.9M est.** | |
+| phases 0–3 scaffolding (tooling, oracle, graphics) | ~25M est. | turn count × context snapshots |
+| phase 4a scaffolding + pilot orchestration | ~15M est. | same |
+| phase 4b orchestration (to checkpoint, then to completion) | ~32M est. | same |
+| final phase (verifier, PROMPT.md, report) | ~6M est. | same |
+| **total** | **~115M** (~109M through Phase 4b) | orchestration mostly prompt-cache reads |
+
+The plan estimated 15–30M, assuming 40–60 tokens per instruction. The measured
+per-instruction cost is 5–7× that, because every call re-reads the roughly 4K-word
+contract and emits about 5 lines of assembly per MIPS instruction. The coordinator's
+interactive planning session (Phase 0) is not included.
+
+## Phase 4b detail
 
 Direct LLM translation of the Super Mario 64 (US) N64 MIPS code to AArch64 macOS. None of the translation logic is written as code: every translated unit in `gen/units/` was written by an LLM worker, following `PROMPT-translate.md` (frozen at `1e25877`) and seeing only its unit's listing. The oracle is the in-tree R4300i interpreter (`src/oracle`), which shares its hardware model with the native runtime.
 
