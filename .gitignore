@@ -17,3 +17,4 @@ bazel-*
 
 # Pipeline scratch: remaining-unit list (regenerated).
 gen/work/todo.txt
+demo/
