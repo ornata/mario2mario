@@ -20,5 +20,20 @@ experiment's headline number; everything else is scaffolding.
 | 2026-09-27 – 09-30 | 4b worker trial arm 2 — **translation workers** (30 units, 29 attempts with output) | harness subagents (Agent tool model "sonnet", resolved per transcript) | claude-sonnet-5 | **779,443 exact** (1 call, batch 23) + **~1.5M estimated** for killed calls: 4,085 instructions on 21 unreported rows × 364.6 tok/instr (its exact rate) ≈ 1.49M |
 | 2026-09-30 | 4b worker trial arm 3 — side measurement, not in the build (20 units) | 2 one-off `claude -p --output-format json` calls (user-approved) | claude-sonnet-5-5 | **1,159,529 exact** final-turn context (same quantity as Agent-tool subagent_tokens; 279.3 tok/instr). CLI aggregate, exact: input 90, cache_creation 1,151,345, cache_read 15,857,413, output 792,405 (thinking 120,378); list cost $15.70 |
 | 2026-09-26 – 09-30 | 4b orchestration after the checkpoint (reconciling 6 rate-limit cuts, validation, lockstep extensions, stride-1 localization of divergences #3/#4, checkpoint-from option, coverage ledger, three-arm trial, full-route test, live play, REPORT.md) | subagent | claude-opus-5-5 | ~30M estimated: ≈260 tool turns × ≈115K average context (mostly prompt-cache reads); basis: turn count × context snapshots, no harness count for the orchestrator |
+| 2026-09-30 | 5/7: provenance verifier + self-test, rom_history, coverage test, //verify:all, PROMPT.md, REPORT.md whole-experiment sections | subagent | claude-opus-5-5 | ~6M estimated: ≈45 tool turns × ≈130K average context (mostly prompt-cache reads); no worker spend |
 
 **Worker totals (translation only):** exact 25,616,823 claude-opus-5-5 + 779,443 claude-sonnet-5 (+ 1,159,529 claude-sonnet-5-5 trial-only) = **27,555,795 exact**; plus ~8.9M estimated for killed calls (Opus ~7.4M, Sonnet 5 ~1.5M). Per-unit rows, attempts and models: `gen/worker_ledger.tsv`; trial-only rows: `gen/trial-sonnet55/ledger.tsv`.
+
+**Final roll-up (whole experiment, all phases):**
+
+| category | tokens | exact / estimated |
+|---|---|---|
+| translation workers (claude-opus-5-5 25,616,823; claude-sonnet-5 779,443; claude-sonnet-5-5 trial 1,159,529) | 27,555,795 | exact (harness `subagent_tokens` / CLI final-turn context) |
+| translation workers, calls killed by usage limits (Opus ~7.4M, Sonnet 5 ~1.5M) | ~8.9M | estimated at each model's exact tok/instr |
+| scaffolding + orchestration, phases 0-3 (3.1M + 6.1M + 16M) | ~25M | estimated (turns × context) |
+| scaffolding + orchestration, phase 4a (6M + 9M) | ~15M | estimated |
+| orchestration, phase 4b (2M to checkpoint + ~30M after) | ~32M | estimated |
+| verification + deliverables (phases 5/7) | ~6M | estimated |
+| **total** | **~115M** (~109M through Phase 4b) | 27.6M exact, ~87M estimated |
+
+Not included: the coordinator's interactive planning session (Phase 0 row, TBD).
