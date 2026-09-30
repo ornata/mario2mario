@@ -150,7 +150,7 @@ static void boundary_loop(NativeState *ns, int counted) {
     counted = 0;
     settle_compare(ns);
     if (ns->boundary_left == 0) {
-      if (ns->checkpoints)
+      if (ns->checkpoints && c->icount >= ns->checkpoint_from)
         checkpoint_write(ns->checkpoints, c, checkpoint_hash(c));
       ns->boundary_left = ns->stride;
     }

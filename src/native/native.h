@@ -22,7 +22,8 @@
 #include "src/hw/hw.h"
 #include "src/oracle/cpu.h"
 
-/* One translated unit, as each gen/units/unit_<id>.s file describes itself in the
+/* One translated unit, as each gen/units/unit_<id>.s file describes itself in
+ * the
  * __DATA,__m2m_units section (no generated registry). */
 typedef struct {
   uint32_t pc, word; /* MIPS address and expected instruction word */
@@ -68,6 +69,7 @@ typedef struct NativeState {
   uint64_t stride;          /* checkpoint every stride-th boundary */
   uint64_t boundaries;      /* boundaries so far (matches the oracle) */
   FILE *checkpoints;        /* NULL: none */
+  uint64_t checkpoint_from; /* no records before this icount (0: all) */
   uint64_t compare_checked; /* IP7 settled for icount <= this */
   uint32_t *unitmap;        /* per physical word: linked unit + 1, or 0 */
   uint32_t *pc_index;       /* all (unit, pc) pairs sorted by pc: unit id */

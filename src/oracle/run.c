@@ -1,7 +1,8 @@
 /* //oracle:run -- boot the ROM under the oracle interpreter.
  *
  *   run [--rom PATH] [--max-insns N] [--trace PATH]
- *       [--checkpoints PATH] [--checkpoint-stride N] [--history N]
+ *       [--checkpoints PATH] [--checkpoint-stride N] [--checkpoint-from I]
+ *       [--history N]
  *       [--replay F.rec] [--task-hashes F.txt] [--exec-words F.txt]
  *
  * --replay feeds controller polls from a .rec recording (src/rcp/input.h).
@@ -9,6 +10,8 @@
  * GL-free Fast3D HLE and writes one hex dl_hash per line.
  * --exec-words writes every distinct (vaddr, word) executed with the icount
  * of its first execution (the translation pipeline's input).
+ * --checkpoint-from I drops checkpoint records before icount I (a narrow
+ * stride-1 window for localizing a divergence).
  * --history N prints the last N (<= 256) executed PCs at the end.
  * --rom defaults to $M2M_ROM. Relative paths are resolved against the
  * directory bazel was invoked from. Prints a summary of milestones. */
@@ -59,7 +62,7 @@ static const char *const stop_names[] = {"none", "budget", "exception"};
 int main(int argc, char **argv) {
   const char *rom_path = getenv("M2M_ROM"), *trace_path = NULL,
              *ckpt_path = NULL, *replay = NULL, *hashes = NULL, *ew_path = NULL;
-  unsigned long long max_insns = 100000000ull, stride = 1;
+  unsigned long long max_insns = 100000000ull, stride = 1, ckpt_from = 0;
   unsigned history = 0;
   for (int i = 1; i < argc; i += 2) {
     const char *a = argv[i], *v = i + 1 < argc ? argv[i + 1] : NULL;
@@ -77,6 +80,8 @@ int main(int argc, char **argv) {
       ckpt_path = v;
     else if (!strcmp(a, "--checkpoint-stride"))
       stride = strtoull(v, NULL, 0);
+    else if (!strcmp(a, "--checkpoint-from"))
+      ckpt_from = strtoull(v, NULL, 0);
     else if (!strcmp(a, "--replay"))
       replay = v;
     else if (!strcmp(a, "--task-hashes"))
@@ -86,11 +91,13 @@ int main(int argc, char **argv) {
     else if (!strcmp(a, "--history"))
       history = (unsigned)strtoul(v, NULL, 0);
     else {
-      fprintf(stderr,
-              "usage: %s [--rom PATH] [--max-insns N] [--trace PATH] "
-              "[--checkpoints PATH] [--checkpoint-stride N] [--history N] "
-              "[--replay F.rec] [--task-hashes F.txt] [--exec-words F.txt]\n",
-              argv[0]);
+      fprintf(
+          stderr,
+          "usage: %s [--rom PATH] [--max-insns N] [--trace PATH] "
+          "[--checkpoints PATH] [--checkpoint-stride N] [--checkpoint-from I] "
+          "[--history N] "
+          "[--replay F.rec] [--task-hashes F.txt] [--exec-words F.txt]\n",
+          argv[0]);
       return 2;
     }
   }
@@ -124,6 +131,7 @@ int main(int argc, char **argv) {
       return 1;
     }
     o->checkpoint_stride = stride ? stride : 1;
+    o->checkpoint_from = ckpt_from;
   }
 
   Hooks *hooks = calloc(1, sizeof(Hooks));

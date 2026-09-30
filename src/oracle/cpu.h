@@ -121,6 +121,7 @@ typedef struct {
   /* Checkpoint stream (optional): every `stride`-th block boundary. */
   FILE *checkpoints;
   uint64_t checkpoint_stride, boundaries;
+  uint64_t checkpoint_from; /* no records before this icount (0: all) */
 
   /* Last 256 executed PCs (ring, for diagnostics). */
   uint32_t history[256];

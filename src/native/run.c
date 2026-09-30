@@ -1,6 +1,7 @@
 /* //native:run -- boot the ROM with translated code (headless).
  *
  *   run [--rom PATH] [--max-insns N] [--checkpoints F] [--checkpoint-stride N]
+ *       [--checkpoint-from I]
  *       [--replay F.rec] [--task-hashes F.txt] [--trap-log F]
  *
  * Mirrors //oracle:run: same boot, hardware model, input replay and hash
@@ -53,7 +54,7 @@ static const char *resolve(const char *path, char *buf, size_t cap) {
 int main(int argc, char **argv) {
   const char *rom_path = getenv("M2M_ROM"), *ckpt = NULL, *replay = NULL,
              *hashes = NULL, *traps = "out/native_traps.txt";
-  unsigned long long max_insns = 100000000ull, stride = 1;
+  unsigned long long max_insns = 100000000ull, stride = 1, ckpt_from = 0;
   for (int i = 1; i + 1 < argc; i += 2) {
     const char *a = argv[i], *v = argv[i + 1];
     if (!strcmp(a, "--rom"))
@@ -64,6 +65,8 @@ int main(int argc, char **argv) {
       ckpt = v;
     else if (!strcmp(a, "--checkpoint-stride"))
       stride = strtoull(v, NULL, 0);
+    else if (!strcmp(a, "--checkpoint-from"))
+      ckpt_from = strtoull(v, NULL, 0);
     else if (!strcmp(a, "--replay"))
       replay = v;
     else if (!strcmp(a, "--task-hashes"))
@@ -132,6 +135,7 @@ int main(int argc, char **argv) {
       return 1;
     }
     ns->stride = stride ? stride : 1;
+    ns->checkpoint_from = ckpt_from;
   }
   boot_pif_hle(&ns->cpu, hw);
 

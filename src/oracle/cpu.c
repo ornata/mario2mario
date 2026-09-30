@@ -975,7 +975,8 @@ static int interrupt_pending(Oracle *o) {
 static void at_boundary(Oracle *o) {
   CpuState *c = &o->cpu;
   o->boundaries++;
-  if (o->checkpoints && o->boundaries % o->checkpoint_stride == 0)
+  if (o->checkpoints && o->boundaries % o->checkpoint_stride == 0 &&
+      c->icount >= o->checkpoint_from)
     checkpoint_write(o->checkpoints, c, checkpoint_hash(c));
   if (interrupt_pending(o)) {
     c->cur_pc = c->pc;
