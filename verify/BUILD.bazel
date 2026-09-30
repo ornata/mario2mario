@@ -16,3 +16,22 @@ sh_test(
         "manual",
     ],
 )
+
+# Provenance verifier: machine-checks the no-decompilation claim over every
+# unit in gen/units/ (source order, bounded per-instruction ranges,
+# address-derived labels, no code motion, CFG isomorphism, provenance
+# words == footer == listing == ROM), then runs its mutation self-test.
+sh_test(
+    name = "provenance",
+    size = "medium",
+    srcs = ["provenance.sh"],
+    data = [
+        "provenance.py",
+        "provenance_selftest.py",
+        "//gen:provenance_selftest_data",
+        "//gen:unit_listings",
+        "//gen:unit_sources",
+    ],
+    env = {"M2M_ROM": ROM_PATH},
+    tags = ["external"],
+)
