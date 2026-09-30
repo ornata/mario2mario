@@ -93,3 +93,8 @@ translation units with the in-repo mechanical tools. LLM workers then translate 
 against `PROMPT-translate.md`; apply the v2 errata in PROMPT.md first. Once `gen/units/` is
 regenerated, `bazelisk test //verify:all` runs the full suite: full-route lockstep,
 provenance, coverage, ROM history and opcode stubs.
+
+## License
+
+MIT; see [LICENSE](LICENSE). The license covers the code and documents in this repository only.
+It grants nothing regarding Nintendo's ROM, the game, or any output regenerated from the ROM.
