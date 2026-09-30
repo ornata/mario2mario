@@ -1,0 +1,20 @@
+# Deliberate short ROM excerpts allowed in the public repo, one per line:
+# path <TAB> SHA-256 of the whole line <TAB> note (line number when allowlisted).
+# Any other ROM run, or these lines in any other file, fails //verify:publish_check.
+src/tools/decoder_golden_test.c	8d9e3f237a5061a47066fad08101cb9b27757c0683db2bb879b92de3eb5e4872	line 17: decoder golden test vector
+src/tools/decoder_golden_test.c	7adf78bcb2c047591d57b780eacbff180780a9a5b9269ab715d9442bad518b1a	line 18: decoder golden test vector
+src/tools/decoder_golden_test.c	37f746f1fb25f334da6be7dfb477797b41f569af49578d1285dcb479e3fe1316	line 19: decoder golden test vector
+src/tools/decoder_golden_test.c	171d6b9eaee682d7fe50af4636a27d64d60543212d1043c603b3d36c86b3d3cf	line 20: decoder golden test vector
+src/tools/decoder_golden_test.c	6fb23c690c2aa2329580ee42b3ef49c62ac4947c4619487d77646d3aaee2f707	line 21: decoder golden test vector
+src/tools/decoder_golden_test.c	574932ea66fb25090d00a8deccef864817a3038b8487ee95f4abfe45092e8eeb	line 22: decoder golden test vector
+src/tools/decoder_golden_test.c	bc92364b7266fe5eb09400ca73784f334c739454f94d0adf36a6e0b26d1d3f7a	line 23: decoder golden test vector
+src/tools/decoder_golden_test.c	d876a38ed1c705cc2780c2b27058a30a90359b4342b28cf7aad81acdbdc0009f	line 24: decoder golden test vector
+src/tools/decoder_golden_test.c	7713ea754c7e82b9df38a2a7b715ca1a2b9eae1e122d872ca3f9158834490ede	line 25: decoder golden test vector
+src/tools/decoder_golden_test.c	e15e848a90bc8c81c826900b87c50a9776a469bc568a39e3ae6dc576b510865b	line 26: decoder golden test vector
+src/tools/decoder_golden_test.c	2efabf3b81ae5ff63db575cb16ace4af7fa717773cd0f2764f30e5523da40140	line 27: decoder golden test vector
+src/tools/decoder_golden_test.c	9ed288a2e4eda98440117f5b684d878983845e45128e28da04b1d6a274d1c1f6	line 28: decoder golden test vector
+PROMPT-translate.md	ac695872d3e58c13fd33437d953772211bb9207b15e497706f584ed2fdcb4f54	line 485: worked example in the frozen translation contract
+PROMPT-translate.md	1ccae1fd985e34ee457cd213c8deb849e0840cc4b8d61d04c7e0c4fe92e0210c	line 486: worked example in the frozen translation contract
+PROMPT-translate.md	304d7b557391aef97fa796965dbd8cc3bd97c61b10484986689603923e9c131a	line 534: worked example in the frozen translation contract
+PROMPT-translate.md	9fbbd013c4672b55d6de8130e5d73fab5e8d9ce40a4040c26be3e765208962d3	line 536: worked example in the frozen translation contract
+PROMPT-translate.md	45a2ee9ccdc040f9d7fac1a0b1442803b9169c6d5ed22452925686c660a15f3a	line 559: worked example in the frozen translation contract
