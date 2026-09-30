@@ -1,0 +1,598 @@
+unit	instructions	worker_tokens	tool_uses	wall_s	attempt	result	hand	model
+8037F100_5052F92A	206	92360	5	288.5	1	ok	0	claude-opus-5-5
+80000000_1F3C1D9F	194	56920	3	21.3	1	untranslatable (contract gap: likely-branch slot not in unit)	0	claude-opus-5-5
+8016F65C_16516131	151	81031	5	198.2	1	ok	0	claude-opus-5-5
+80246AEC_B6F9E36E	159	80901	5	218.9	1	ok	0	claude-opus-5-5
+8016F974_2CE4592B	161	82345	5	219.4	1	ok	0	claude-opus-5-5
+8024719C_FCF33F16	199	87360	5	237.2	1	ok	0	claude-opus-5-5
+80246E70_4CDDCC1E	203	89680	5	245.6	1	fail (lockstep divergence #3: validated, but not-taken fallthrough after a gap-terminated delay slot targets B+0xC; found by scan)	0	claude-opus-5-5
+802461FC_5EA6E928	222	92936	5	276.1	1	ok	0	claude-opus-5-5
+8024669C_D31161CA	225	99098	5	327.3	1	ok	0	claude-opus-5-5
+80000000_1F3C1D9F	194	89511	5	267.3	2	ok	0	claude-opus-5-5
+80000180_0F066096	4	43693	5	20.5	1	ok	0	claude-opus-5-5
+80247B3C_5B54245A	156	81644	6	220.4	1	ok	0	claude-opus-5-5
+80278120_06667282	203	88147	5	224.8	1	ok	0	claude-opus-5-5
+802474B8_31AA5959	182	84775	5	225.1	1	ok	0	claude-opus-5-5
+80247F08_641534AD	200	87733	5	248.8	1	fail (lockstep divergence #3: validated, but not-taken fallthrough after a gap-terminated delay slot targets B+0xC; found by scan)	0	claude-opus-5-5
+8024894C_F67CC589	204	88626	5	255.2	1	ok	0	claude-opus-5-5
+802491D0_45E8ADD6	198	92731	5	284.7	1	ok	0	claude-opus-5-5
+802483B8_8AFEBAED	241	102749	5	331.3	1	ok	0	claude-opus-5-5
+80329588_B75F5C43	168	60009	8	487.5	1	ok (call 2 units, 134661 tokens)	0	claude-opus-5-5
+80325970_10D5CBC4	209	74652	8	487.5	1	ok (call 2 units, 134661 tokens)	0	claude-opus-5-5
+802788A4_362AABB2	206	69435	8	520.4	1	ok (call 2 units, 144937 tokens)	0	claude-opus-5-5
+80278504_B95A96E3	224	75502	8	520.4	1	ok (call 2 units, 144937 tokens)	0	claude-opus-5-5
+803240D0_27EABF3A	208	72276	8	520.6	1	ok (call 2 units, 142814 tokens)	0	claude-opus-5-5
+803225D0_A32383FD	203	70538	8	520.6	1	ok (call 2 units, 142814 tokens)	0	claude-opus-5-5
+803236F0_920DCE5E	188	67099	8	541.7	1	ok (call 2 units, 147402 tokens)	0	claude-opus-5-5
+803283F0_F94690E9	225	80303	8	541.7	1	ok (call 2 units, 147402 tokens)	0	claude-opus-5-5
+803276B4_56C86ED9	204	74351	8	564.1	1	ok (call 2 units, 149429 tokens)	0	claude-opus-5-5
+803217A8_92B55898	206	75078	8	564.1	1	ok (call 2 units, 149429 tokens)	0	claude-opus-5-5
+80322E6C_4DAE024B	201	76565	8	605.9	1	ok (call 2 units, 156939 tokens)	0	claude-opus-5-5
+80327B98_E19613E1	211	80374	8	605.9	1	ok (call 2 units, 156939 tokens)	0	claude-opus-5-5
+80325FD0_5AA6BB80	206	75224	8	607.0	1	ok (call 2 units, 156654 tokens)	0	claude-opus-5-5
+80322940_84C5DCFE	223	81430	8	607.0	1	ok (call 2 units, 156654 tokens)	0	claude-opus-5-5
+80327F14_AA18CFE4	201	72022	8	618.7	1	ok (call 2 units, 160525 tokens)	0	claude-opus-5-5
+8032321C_D6DEFEE9	247	88503	8	618.7	1	ok (call 2 units, 160525 tokens)	0	claude-opus-5-5
+80328F14_47D1C587	140	51289	11	542.1	1	ok (call 3 units, 154598 tokens)	0	claude-opus-5-5
+8031948C_F214CB12	56	20515	11	542.1	1	ok (call 3 units, 154598 tokens)	0	claude-opus-5-5
+8031958C_3904ABF7	226	82794	11	542.1	1	ok (call 3 units, 154598 tokens)	0	claude-opus-5-5
+80278F98_944F4BAE	205	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8027E3E0_E3FC3252	200	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80314BE0_E3B580BD	205	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80314FE0_08725D0E	230	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80315638_B6B7A6B2	172	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80316D78_C8A9CCD1	126	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80317128_29744522	210	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+803177E0_64EB3B20	209	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80317C44_046BCA18	210	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80318520_7D2C4B92	236	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80319920_5CA152BC	200	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8031BD50_20860718	235	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8031E5C0_E762E2A7	132	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80321058_87207ACA	219	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80324F5C_1EABC80B	214	NA	NA	NA	1	ok (worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+802799DC_4D47B3DF	104	33187	11	650.4	1	ok (call 3 units, 180927 tokens)	0	claude-opus-5-5
+803291F4_E743EB0D	225	71796	11	650.4	1	ok (call 3 units, 180927 tokens)	0	claude-opus-5-5
+802794A0_E272F601	238	75944	11	650.4	1	ok (call 3 units, 180927 tokens)	0	claude-opus-5-5
+8031E9A8_C0397E39	166	55085	11	669.5	1	ok (call 3 units, 188480 tokens)	0	claude-opus-5-5
+802D6F48_86723EDC	202	67029	11	669.5	1	ok (call 3 units, 188480 tokens)	0	claude-opus-5-5
+80315DA8_6C1DB925	200	66366	11	669.5	1	ok (call 3 units, 188480 tokens)	0	claude-opus-5-5
+803181EC_15FFAFEA	165	57280	11	673.2	1	ok (call 3 units, 184680 tokens)	0	claude-opus-5-5
+803246C0_62BBCCEA	208	72205	11	673.2	1	ok (call 3 units, 184680 tokens)	0	claude-opus-5-5
+80323A60_9CBDC2FC	159	55195	11	673.2	1	ok (call 3 units, 184680 tokens)	0	claude-opus-5-5
+8037A434_399996B2	203	65528	11	723.7	1	ok (call 3 units, 198839 tokens)	0	claude-opus-5-5
+8037B474_3543BE50	216	69722	11	723.7	1	ok (call 3 units, 198839 tokens)	0	claude-opus-5-5
+8029D1D8_508824D0	197	63589	11	723.7	1	ok (call 3 units, 198839 tokens)	0	claude-opus-5-5
+80323CEC_05DE9863	248	83253	11	762.1	1	ok (call 3 units, 204439 tokens)	0	claude-opus-5-5
+80328910_D3D46789	138	46326	11	762.1	1	ok (call 3 units, 204439 tokens)	0	claude-opus-5-5
+80328B90_2E4BC749	223	74860	11	762.1	1	ok (call 3 units, 204439 tokens)	0	claude-opus-5-5
+8031FEB8_E092EAAF	200	68962	11	787.5	1	ok (call 3 units, 209296 tokens)	0	claude-opus-5-5
+80318E38_C2AFD3DA	206	71029	11	787.5	1	ok (call 3 units, 209296 tokens)	0	claude-opus-5-5
+8031B994_3B47FDC5	201	69305	11	787.5	1	ok (call 3 units, 209296 tokens)	0	claude-opus-5-5
+8031A6CC_5B24D135	243	82276	11	836.7	1	ok (call 3 units, 222447 tokens)	0	claude-opus-5-5
+80319E58_474F74E7	209	70763	11	836.7	1	ok (call 3 units, 222447 tokens)	0	claude-opus-5-5
+8031E1B0_D2FF935E	205	69408	11	836.7	1	ok (call 3 units, 222447 tokens)	0	claude-opus-5-5
+803188F4_649C68CC	206	69425	11	857.9	1	ok (call 3 units, 224785 tokens)	0	claude-opus-5-5
+8031F28C_2365E27E	247	83241	11	857.9	1	ok (call 3 units, 224785 tokens)	0	claude-opus-5-5
+8037EB98_2ED230CA	214	72119	11	857.9	1	ok (call 3 units, 224785 tokens)	0	claude-opus-5-5
+8027AAD4_67047E1A	203	67484	11	625.5	1	ok (call 3 units, 181837 tokens)	0	claude-opus-5-5
+8027AEEC_0E7B48D1	143	47536	11	625.5	1	ok (call 3 units, 181837 tokens)	0	claude-opus-5-5
+8027B688_948C145A	201	66817	11	625.5	1	ok (call 3 units, 181837 tokens)	0	claude-opus-5-5
+80378F84_439CE057	196	71207	11	664.9	1	ok (call 3 units, 185283 tokens)	0	claude-opus-5-5
+80379294_3FF2BA78	107	38873	11	664.9	1	ok (call 3 units, 185283 tokens)	0	claude-opus-5-5
+80379F60_A1A591F9	207	75203	11	664.9	1	ok (call 3 units, 185283 tokens)	0	claude-opus-5-5
+8027B9CC_410C8E18	177	60425	11	720.2	1	ok (call 3 units, 199025 tokens)	0	claude-opus-5-5
+8027BCBC_B309EC3F	213	72714	11	720.2	1	ok (call 3 units, 199025 tokens)	0	claude-opus-5-5
+8027C840_4828112F	193	65886	11	720.2	1	ok (call 3 units, 199025 tokens)	0	claude-opus-5-5
+8027E0F4_5BF9C9C1	157	52587	11	772.0	1	ok (call 3 units, 206322 tokens)	0	claude-opus-5-5
+80315958_C39D8B89	228	76365	11	772.0	1	ok (call 3 units, 206322 tokens)	0	claude-opus-5-5
+803162E8_7FB90C4C	231	77370	11	772.0	1	ok (call 3 units, 206322 tokens)	0	claude-opus-5-5
+8031CD58_CEE23755	208	70322	11	786.4	1	ok (call 3 units, 207244 tokens)	0	claude-opus-5-5
+8031D2C4_FB22D82C	224	75730	11	786.4	1	ok (call 3 units, 207244 tokens)	0	claude-opus-5-5
+8031D8F8_0DC84354	181	61192	11	786.4	1	ok (call 3 units, 207244 tokens)	0	claude-opus-5-5
+8031AEE8_E3B49AC7	205	68219	11	798.7	1	ok (call 3 units, 213307 tokens)	0	claude-opus-5-5
+8031B534_D28E3C49	218	72544	11	798.7	1	ok (call 3 units, 213307 tokens)	0	claude-opus-5-5
+8031C138_23CA5727	218	72544	11	798.7	1	ok (call 3 units, 213307 tokens)	0	claude-opus-5-5
+8031ECF0_12D47B40	221	78413	11	857.6	1	ok (call 3 units, 221753 tokens)	0	claude-opus-5-5
+803207C0_C389D57D	201	71315	11	857.6	1	ok (call 3 units, 221753 tokens)	0	claude-opus-5-5
+80324C20_A1DDDA45	203	72025	11	857.6	1	ok (call 3 units, 221753 tokens)	0	claude-opus-5-5
+8037BF64_1165ACD7	202	63010	14	905.2	1	ok (call 4 units, 242365 tokens)	0	claude-opus-5-5
+8037CC74_920B7BD1	131	40862	14	905.2	1	ok (call 4 units, 242365 tokens)	0	claude-opus-5-5
+8037D1D0_901AF54A	233	72678	14	905.2	1	ok (call 4 units, 242365 tokens)	0	claude-opus-5-5
+8037DE34_468B92F9	211	65815	14	905.2	1	ok (call 4 units, 242365 tokens)	0	claude-opus-5-5
+80182B48_60C25608	171	46972	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+80182DFC_2F95B266	195	53562	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+801831E8_9F28D9EC	225	61802	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+80183B60_1CBA57B7	208	57132	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+80184194_3BD84334	190	52188	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+8018468C_8AAA91A5	200	54935	20	1282.6	1	ok (call 6 units, 326591 tokens) [4b trial: 6/call]	0	claude-opus-5-5
+80184AB4_6D2B2E5D	214	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80185010_2D286CAE	229	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+801854AC_F83E5D6C	226	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80185B34_A08C68B2	128	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80185D4C_C4107E88	215	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80186180_59B70D19	209	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+801867B4_3F389FFD	210	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80186D18_702A3820	213	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80187874_80666F96	211	NA	NA	NA	1	ok (4b trial 10/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80188B7C_A0F1DAB2	225	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018940C_5D72CFF9	216	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+80189E28_18C3496E	208	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018A630_071470A9	207	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018B314_D9BA0F6E	203	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018C2F0_1E07E3D4	229	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018C938_CB1F2AC5	214	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018CD40_303B3521	207	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+8018D5D8_571851E1	200	NA	NA	NA	1	ok (4b trial 15/call; worker killed by 429 after writing; tokens not reported)	0	claude-opus-5-5
+801880AC_3DF4F213	203	54250	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+8018E090_BF0EC7F9	234	62528	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+8018EAC4_7B0B02C1	250	66803	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+8018F2C8_DF9261E4	250	66803	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+80191744_88720FC1	144	38479	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+80192050_AF7789AF	203	54244	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+8019237C_CF45D561	202	53977	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+80193424_1EC7D969	215	57451	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+801937EC_E3875E79	205	54779	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+80193DA4_76EA79ED	148	39547	32	2720.6	1	ok (call 10 units, 548861 tokens) [4b trial: 10/call]	0	claude-opus-5-5
+8019408C_06A74854	179	47115	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+80194360_0323FC28	208	54740	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+80194C78_6A1550D0	130	34212	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019504C_79C9383B	204	53687	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019537C_4A2FF20E	203	53424	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+801956A8_BDD1C168	222	58425	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+80195A30_E6AF0454	247	65004	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+801964A0_B5B8BBCB	171	45003	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+80196754_46898E8D	600	157905	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+801970B4_EBF25A27	247	65004	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+80197754_AD236265	223	58688	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019848C_74834940	84	22106	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019A48C_E5B4FA0F	209	55003	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019A7D0_51E89E22	208	54740	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8019AB10_D18573B3	200	52635	52	4449.1	1	ok (call 15 units, 877691 tokens) [4b trial: 15/call]	0	claude-opus-5-5
+8016F000_8633A366	131	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8016FBB0_5A895C38	170	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8016FE60_8C9A9248	225	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80170480_6C00803D	216	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80176F88_1F78FC9F	219	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80177318_2A62C9E3	222	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801776BC_06CD6E56	205	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80177B68_AB3139DD	212	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017AE2C_EE734072	140	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017B0D0_0C54EA27	224	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017B45C_DCA38D6F	222	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017B940_8F01A25A	203	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017E554_0AE9CF0D	210	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017F6A8_3E03FE9A	192	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017FA3C_21C4FC08	112	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8017FDA4_1EA0AF3D	202	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80180AF0_908E3882	157	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019BD48_83914CB3	105	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019BFB0_EA44E346	164	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019C240_B491FD52	215	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019C674_503CDC22	205	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019FB60_8832D791	117	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8019FD34_FD481FE4	207	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A01B0_8444334A	220	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A0610_B8B66BBC	229	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A0A2C_72302650	210	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A2A08_BB8EC992	203	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A2DD0_17BD589C	212	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A36E8_5D0C806E	207	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+801A3AD8_EF69D157	202	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80248D2C_FC782922	212	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80249744_CEA7908E	227	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80249DF4_404D1350	214	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+8024A62C_4A7B47EE	213	NA	NA	NA	1	ok (4b wave 1, 10/call; worker still running at wind-down checkpoint; tokens not reported: killed by rate limit after the checkpoint)	0	claude-opus-5-5
+80172F2C_485BEBE2	225	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+80177EFC_73499FB0	206	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+8017C0DC_E451BBDA	236	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+80180FE4_F5F66426	101	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+8019CD2C_5982CC21	200	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+8024ACF0_5F6DEBC2	244	NA	NA	NA	1	ok (4b wave 1, 10/call; worker killed by rate limit after checkpoint; tokens not reported)	0	claude-opus-5-5
+# NOTE	contract §9 ambiguity: cvt.w/l recipe stores w16 after M2M_FPU_END, which clobbers x16; workers routed the value through NS_TMP or fmov s0; a scan of all units found none storing a clobbered x16 (REPORT.md material)						
+8017D75C_B479F853	219	57184	32	2350.7	1	fail (lockstep divergence #3: validated, but not-taken fallthrough after a gap-terminated delay slot targets B+0xC; found by scan) (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+8017DB38_0FDD4240	204	53262	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+803224F0_9736F6A7	172	44907	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+803256E0_802E5E0B	204	53262	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+80326E34_28C6A57F	155	40468	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+803264A8_BD033593	203	53001	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+80329888_BDC91056	219	57178	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+8019EAF0_30541AE3	161	42035	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+801A24B4_A06AC68B	140	36552	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+801A1274_C7B62381	230	60050	32	2350.7	1	ok (call 10 units, 497899 tokens) [4b batch 4]	0	claude-opus-5-5
+801A160C_79D156AF	130	34043	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+801A675C_0EA54593	200	52365	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+801A712C_B019FDE5	203	53151	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+803218D8_C4E4B569	206	53936	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+8017A2A0_D3DD226D	245	64148	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+801A1918_6D69000C	201	52627	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+8017A900_D056FEB9	208	54460	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+80179120_B8E38070	213	55769	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+8019F7D4_83838886	220	57602	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+8017D0A8_C13C755A	185	48438	32	2554.0	1	ok (call 10 units, 526539 tokens) [4b batch 5]	0	claude-opus-5-5
+80181C84_79098015	105	28914	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+8017899C_AEFA87CA	222	61119	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+801A6430_0AFC1B02	203	55888	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+801818A0_2FD0CAC0	246	67727	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+802763C4_C0D85653	206	56714	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+8031AB78_2445A0B1	200	55062	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+801A4D70_97E40514	169	46528	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+8031C3E8_CBB67B80	211	58091	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+801A279C_1830FE39	155	42673	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+801799AC_45981AB7	212	58366	32	2613.7	1	ok (call 10 units, 531082 tokens) [4b batch 6]	0	claude-opus-5-5
+8031F148_BBF41D63	204	55849	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8037E388_1884B13A	204	55843	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8019B2BC_091C69DA	207	56664	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+801A5538_135E0E36	201	55022	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8019EE34_EFB277E8	230	62960	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+801814A8_B4759908	156	42703	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8019D260_DB28E814	209	57212	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+801A585C_F91981BD	125	34217	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8017D3D4_C6255951	220	60223	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+8017C5FC_F9CD9243	217	59402	32	2643.8	1	ok (call 10 units, 540095 tokens) [4b batch 3]	0	claude-opus-5-5
+80278E7C_734D6440	208	55738	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037DC84_32A5506A	194	51981	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037CEE8_47054188	217	58143	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037D948_91B54177	164	43942	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037B660_FD3DAE4E	230	61626	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037BBDC_5587B88D	209	56000	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+801764E0_D0DF3512	216	57875	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+8037F36C_D60ACEBD	196	52516	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+80383220_405CAF6F	216	57875	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+802DB350_BD518DE5	199	53320	32	2690.2	1	ok (call 10 units, 549016 tokens) [4b batch 8]	0	claude-opus-5-5
+803174A4_7C49326D	204	60607	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+80319E04_C728C5BC	211	62683	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8031CB44_472CD571	208	61791	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8037F994_3A204302	250	74269	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8027AA20_43DA0915	156	46343	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8029CE48_A97C1180	212	62980	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8037EB04_272F264F	215	63871	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+80277D48_37987B09	214	63574	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8031FD50_93DFBB95	204	60603	30	2746.5	1	ok (call 9 units, 556721 tokens) [4b batch 2]	0	claude-opus-5-5
+8031DF2C_A0751C46	230	0	30	2746.5	1	UNTRANSLATABLE 8031EC30 (branch into a delay slot: contract gap; call tokens counted on batch-2 rows) -> quarantined for hand translation	0	claude-opus-5-5
+803801E0_A3FA99E3	192	52802	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+8027B164_A76E1FAC	199	54720	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+8027A234_58CADB0D	208	57195	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802CC798_3AC14695	203	55820	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802CCC48_467B145D	212	58295	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802CBC10_542FB2C7	224	61595	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802CB0B0_536F274D	203	55820	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802CB88C_F2E66592	219	60220	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+802D1B60_EA93B9DA	194	53345	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+80314014_82584DEA	212	58295	32	2819.7	1	ok (call 10 units, 568107 tokens) [4b batch 1]	0	claude-opus-5-5
+8019F458_6326B308	207	57946	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+802CC3CC_B4F6171B	238	66619	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+8037A9A0_AA208E54	201	56262	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+8037A69C_D9BE3051	185	51784	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+802CBFE0_0068FB41	181	50664	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+8031F944_D83F9EF4	217	60741	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+803203DC_25C6E054	204	57102	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+802D65B0_3F2AC952	201	56262	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+802D6918_5702F806	192	53743	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+802D6CD0_A2D93EC7	217	60741	32	2844.1	1	ok (call 10 units, 571864 tokens) [4b batch 7]	0	claude-opus-5-5
+# KILLED	wave 2 (repair A/B + batches 9-14, 8 calls) killed by rate limit after ~1 partial unit each; nothing kept; tokens not reported, estimated ~0.6M (8 calls x ~75K for contract+inputs+one unit)						
+8031CF90_0CD3ADC7	141	42452	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+8031E9A8_1C6920A8	165	49674	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+8031ECE8_11685E91	224	67436	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+803207C0_C520E0B9	202	60813	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+803217A8_E3685781	207	62318	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+80324F5C_9E4C497F	215	64726	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+8031DF2C_743BEDEA	113	34019	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+8031EC38_EC221301	117	35223	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+8031EC40_368A99CC	1	301	29	1980.6	1	ok (call 9 units, 416962 tokens) [4b repair B + split]	0	claude-opus-5-5
+80315638_AF498AB5	216	63769	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+80316470_1009C78F	189	55794	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+803181EC_F573574B	231	68193	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+80319A38_8EF0403D	214	63174	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+8031B1C0_0BD6EB42	213	62879	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+8031B6A0_A847DD6C	222	65536	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+8031C3BC_95A4F4A0	203	59927	23	2094.5	1	ok (call 7 units, 439272 tokens) [4b repair A]	0	claude-opus-5-5
+8029A60C_6A1C1AE6	188	51981	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+8029995C_636FB18C	217	59992	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+80287BE0_12FB5EF2	172	47551	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+802CFD78_46050906	201	55569	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+802D024C_918E75CC	167	46169	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+802D0C74_A7C2938E	205	56674	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+802D1320_8758B9E9	205	56674	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+8027545C_BF67C1EB	213	58886	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+8037F67C_7F1E377A	196	54186	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+8024B4A0_C4978A9F	205	56674	32	2589.3	1	ok (call 10 units, 544356 tokens) [4b batch 14]	0	claude-opus-5-5
+8029CA58_4D1DB597	244	66295	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+802C9114_9D3DD4BF	163	44285	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+802C93D0_DC6D34A1	152	41296	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+80385AE8_642DEEAC	213	57869	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+80384F7C_C114634C	201	54609	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+802A10F0_7DE86EE1	213	57869	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+803846C0_7DB069A6	217	58956	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+803840A4_898AB404	207	56239	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+80383C70_7EE14924	203	55152	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+8029EDBC_CD90698F	224	60858	32	2600.4	1	ok (call 10 units, 553428 tokens) [4b batch 10]	0	claude-opus-5-5
+802D7780_F8157E80	210	56976	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802D7BEC_271706D8	186	50461	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+80173AB0_8604BB7D	122	33098	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802D71AC_F6FACA57	185	50189	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802D7F40_A5D9C4B6	224	60770	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802D88B4_B593B488	240	65111	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+8027684C_30A6CBEA	210	56972	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802771B4_BA881D3B	218	59142	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+802775B4_8C5A7823	236	64025	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+8037C780_884C2669	226	61312	32	2651.4	1	ok (call 10 units, 558056 tokens) [4b batch 12]	0	claude-opus-5-5
+8029E76C_E0519B43	233	64657	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+80173418_3859B330	178	49389	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+802A2748_C432A7BB	225	62430	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+80379440_8CD8894E	212	58823	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+8027DA6C_01589AEA	203	56326	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+8027D6F4_EE22FB4B	216	59933	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+80379C74_030A69DC	218	60488	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+8027D4B4_C9C3C820	140	38845	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+8027C42C_EC19F70D	204	56604	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+80173FA4_577BC439	224	62153	32	2703.6	1	ok (call 10 units, 569648 tokens) [4b batch 11]	0	claude-opus-5-5
+80381E8C_B8B9CD1A	248	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+80382F58_EF1D2292	172	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+80382B7C_0A55E23E	243	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8038289C_95E5AEB1	160	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802C61C4_DF868A3C	249	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802C9C84_930D0BB0	219	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802C9630_ED2D9708	201	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8037C114_FFB26127	230	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802CA014_DAC727E3	216	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8029D324_CB2397A6	232	NA	NA	NA	1	ok (4b batch 9, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802B1278_FBED4A07	163	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8029D924_FFDB4C9B	245	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802B9C30_0C9B83E5	210	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8024BB1C_0DBB0428	238	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+80254F2C_87E082DC	230	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802876B0_A4C88B00	182	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802E3CB8_339CFF6B	216	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+8024BF58_88586FCE	202	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+802A719C_BD81B6E5	213	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+80256B14_65F40522	250	NA	NA	NA	1	ok (4b batch 13, 10/call; worker killed by rate limit at completion; tokens not reported)	0	claude-opus-5-5
+# ESTIMATE	batches 9 and 13 (20 units) killed by rate limit before usage was reported; all 20 units validated OK; estimated ~1.1M tokens (2 calls x ~555K, mean of batches 10-12, 14)
+8028526C_7E0A7497	240	63936	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028A824_A9399200	201	53543	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028ED78_869EE407	242	64465	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028D408_B60FAAE5	204	54342	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028F440_AA99B5B2	47	12520	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+80286AE0_868C15A4	164	43687	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+80284824_7384566C	208	55408	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028246C_BB4534D7	203	54076	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+8028BBC8_21F5C05B	227	60469	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+80283BE8_0EC76B0A	175	46617	32	2175.2	1	ok (call 10 units, 509063 tokens) [4b batch 22]	0	claude-opus-5-5
+802514E0_F678CC89	203	53612	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+802507FC_E1C4A189	211	55720	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+8024FF04_84957066	245	64699	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+8025B404_822EBE7A	204	53872	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+8025D8BC_041BC160	242	63907	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+8025B11C_2E73BABD	186	49118	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+802594A0_4B6F7405	113	29841	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+8029C770_8428031F	181	47798	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+80309EA8_A9F84401	209	55192	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+802A2308_03C8CDE0	202	53344	32	2282.0	1	ok (call 10 units, 527103 tokens) [4b batch 18]	0	claude-opus-5-5
+802E28EC_70003293	200	55731	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+802E2CC0_E7BDC960	102	28420	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+8038155C_A57CF3FD	204	56841	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+803819F4_6D2BF854	214	59627	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+802E245C_39F25AC4	141	39287	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+80254A90_34FF7A05	236	65757	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+80378B2C_C25DFE40	223	62135	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+80253E14_88B801F4	201	56005	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+80286F30_56000ABE	212	59070	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+80252B40_2F31CE39	216	60184	32	2413.5	1	ok (call 10 units, 543057 tokens) [4b batch 15]	0	claude-opus-5-5
+802A41E0_51D427D4	228	62319	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802A8F0C_6B817096	219	59853	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802E8F68_4A570BC9	208	56847	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802E9444_12A00D6E	211	57667	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802EEA64_9FF66E23	218	59580	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+80303848_CC528B97	93	25417	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+80303A08_DAFE2903	211	57667	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+80303D84_6191248C	225	61493	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802FA6C4_B318FC52	204	55754	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+8029B900_645768AA	201	54934	32	2449.5	1	ok (call 10 units, 551531 tokens) [4b batch 20]	0	claude-opus-5-5
+802ACC00_3A2B3FC4	235	64795	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+802AC8E0_D1293D83	194	53486	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+8029FB0C_4AF5D9C6	205	56519	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+8029F464_901A1B20	205	56519	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+803838C8_A5870913	212	58449	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+8029E27C_1A4CC0D6	194	53486	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+802ACFB8_BB00F5CC	207	57070	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+8038575C_3CA37252	200	55140	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+802BFDE4_868F031B	196	54037	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+802A35E4_0AFC405E	204	56243	32	2488.6	1	ok (call 10 units, 565744 tokens) [4b batch 16]	0	claude-opus-5-5
+80286790_95A801B9	212	57536	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+80288BD0_C659095B	220	59703	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+80288614_6E8AC660	206	55903	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+802E370C_7BC1AE7B	212	57532	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+8028B724_7365E705	208	56446	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+80287288_FF9EECBB	204	55361	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+8028FC8C_0096E6C3	210	56989	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+80289178_DB115DCF	207	56175	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+8028AC28_F8F67EE2	208	56446	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+8028CBF0_E328DB2F	230	62417	32	2531.1	1	ok (call 10 units, 574508 tokens) [4b batch 21]	0	claude-opus-5-5
+802A1E90_2780CB7A	191	52646	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802A068C_09C5F6F1	191	52642	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802F91B4_56CAFDC7	200	55122	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802A0BDC_C6B05361	217	59808	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802F4B78_33F66BD0	204	56225	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802E6DA0_C61AA062	236	65044	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802E5104_89AA14DB	222	61186	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802F2F00_D712ED4F	205	56500	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802AAD6C_F316A8F5	190	52366	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802A2F14_C5BFB55B	249	68627	32	2537.4	1	ok (call 10 units, 580166 tokens) [4b batch 19]	0	claude-opus-5-5
+802F08C4_E0ACA182	210	57694	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80383614_2852DF27	170	46700	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80254568_E4C1D353	205	56315	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+802539E0_8086BAAA	217	59611	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80253128_0E4ED5D7	200	54941	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80380DE0_83B28DEE	207	56864	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80380690_5E873413	211	57963	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+803809DC_B99724B7	225	61809	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80251920_13938966	205	56315	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+80381154_71D74CAD	218	59886	32	2574.6	1	ok (call 10 units, 568098 tokens) [4b batch 17]	0	claude-opus-5-5
+8029B48C_410F09DC	59	NA	NA	NA	1	ok (4b batch 27, 10/call; worker killed by rate limit after this unit; tokens not reported)	0	claude-opus-5-5
+80286224_C792694A	168	NA	NA	NA	1	fail: assemble (add/sub immediate with wzr source, lines 63/154) (4b batch 24 Sonnet trial; worker killed by rate limit after this unit; tokens not reported)	0	claude-sonnet-5
+# KILLED	wave 4 (Opus batches 26-30, 5 calls; Sonnet trial batches 23-25, 3 calls) killed by the shared session limit after ~1 unit each; kept: 8029B48C (opus, OK), 80286224 (sonnet, complete but failed validation, counted as a first-time fail); 5 partial .s files discarded. Tokens not reported; estimated opus ~0.45M (5 x ~90K), sonnet ~0.27M (3 x ~90K)
+8029B5B8_CB14E101	210	56840	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+803011F8_758F4DB5	229	61979	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802D60FC_B508112A	194	52506	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802D5C78_4E029C04	204	55213	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802E3240_9DE5021A	201	54401	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802510C4_DD210FB0	209	56566	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+80255EB4_7EA219AD	202	54671	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802563A0_0E65BAC6	171	46281	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802DA05C_ED6C99FB	216	58460	29	2056.9	1	ok (call 9 units, 496917 tokens) [4b batch 27 respawn]	0	claude-opus-5-5
+802991F0_B3983DFD	212	57493	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+80297908_F63DB92F	148	40132	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+80297614_F583B111	189	51250	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+80295E58_3F26958E	211	57215	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+8028829C_8B5C54B5	206	55859	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+80287EE8_A4CE39C4	237	64266	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+8029AF98_9F004E32	78	21150	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+8029B0D8_E1DBACC0	235	63723	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+802CE524_90F9443F	205	55588	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+802DAD54_ADEDE83C	206	55859	32	2152.4	1	ok (call 10 units, 522535 tokens) [4b batch 26]	0	claude-opus-5-5
+80264C40_8788D940	210	58944	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+8026499C_288BCC1C	162	45468	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80265670_D71ACA62	175	49116	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80250BEC_1CBABEBF	221	62027	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80263F84_752CA372	203	56975	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80265DF8_BD4D1C60	245	68763	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+802C2190_26E5020C	205	57536	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+802E92B0_F4241C85	91	25540	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80257738_3BF51057	208	58378	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+802A4CD0_3E3CA865	200	56133	32	2278.1	1	ok (call 10 units, 538880 tokens) [4b batch 30]	0	claude-opus-5-5
+80252220_6C5C404B	240	64140	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+8026DD90_2B02EB10	200	53446	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+80269BB0_485A2C17	213	56920	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+8026B680_035F10A4	226	60394	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+8026A580_C0D9256E	237	63334	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+80270018_E6BC4A6F	210	56118	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+802690B8_172C794E	216	57722	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+802687EC_AF5E0F64	217	57989	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+80265280_6CD0490A	205	54782	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+80266354_F45437F9	200	53446	32	2477.0	1	ok (call 10 units, 578291 tokens) [4b batch 29]	0	claude-opus-5-5
+802DA498_D6E338DC	202	55189	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+802D9070_F782BF24	200	54636	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+802D9780_35EE309C	205	56002	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+802D9B1C_92752C89	228	62286	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+802637F0_E1CF45C9	209	57095	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+80262C24_B60BF376	202	55183	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+80260A8C_C3708C04	216	59007	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+8025EABC_739F41C4	226	61739	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+80255AA4_050D6AAF	208	56822	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+80251D50_0B805B2A	210	57368	32	2510.6	1	ok (call 10 units, 575327 tokens) [4b batch 28]	0	claude-opus-5-5
+80283FA0_73D7C6C5	188	68544	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+8027FB58_99F85922	217	79110	33	4201.7	1	ok (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+8028F914_90605411	220	80204	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+802895D0_D1153451	220	80204	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+80289AF4_21C237F7	173	63069	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+802843EC_E418A469	223	81298	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+8028A44C_4E01A8BB	211	76923	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+8028C344_7E10A4C4	240	87495	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero); plus a load/store offset outside [0,4095] (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+80280148_F64445E1	237	86402	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+80280630_3DAC6CF5	209	76194	33	4201.7	1	fail: assemble error: add/sub immediate with a wzr source (addiu from $zero) (call 10 units, 779443 tokens) [4b batch 23 sonnet trial]	0	claude-sonnet-5
+# WASTE	orchestrator error: one worker call spawned with an empty placeholder prompt (did nothing, no files); 27467 tokens, 1 tool use, exact; counted in worker totals as overhead, model opus
+# DECISION	Sonnet 5 trial: batch 23 passed 1/10 first time (plus 80286224 failed in the killed wave-4 call): 1/11 = 9% vs Opus 423/425 first-time ok. Dominant failure: add/sub immediate with a wzr source for addiu from $zero (worked example 2 shows the correct mov+register form). Even a perfect batch 24-25 caps Sonnet at 68%, so per the decision rule the remaining bulk (batches 31-35) and all Sonnet-failed units go to Opus. Batch 23 Sonnet worker also used Bash once (mkdir) against the Read/Write-only rule.
+8028B068_B6A73DD3	246	NA	NA	NA	1	fail (lockstep divergence #4: validated, but trunc.w.s stored clobbered w16) (4b batch 24 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+80379790_25B40F7E	96	NA	NA	NA	1	ok (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+80286224_C792694A	168	NA	NA	NA	2	fail: assemble error: add/sub immediate with a wzr source (4b batch 24 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+8028D004_02FE781A	229	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 24 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+802864EC_D3493704	154	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 24 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+8027CD98_AB268C8A	211	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+8027D13C_5FE85710	213	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+802CEAD8_BFCB790B	220	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+802D058C_76BC9EF1	164	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+802D0900_3BCDEFFB	211	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+802CD55C_BD5C5E19	216	NA	NA	NA	1	fail: assemble error: add/sub immediate with a wzr source (4b batch 25 sonnet trial respawn; worker killed by the shared session limit; tokens not reported)	0	claude-sonnet-5
+80283FA0_73D7C6C5	188	NA	NA	NA	2	ok (Opus repair of Sonnet batch-23 failure; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+80290864_9EA741B4	170	NA	NA	NA	1	ok (4b batch 31; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+80295BC4_D3CFADC6	160	NA	NA	NA	1	ok (4b batch 31; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+80266B94_24E10562	205	NA	NA	NA	1	ok (4b batch 32; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+8026708C_DED01DBF	207	NA	NA	NA	1	ok (4b batch 32; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+802D43E0_F4D71D3D	175	NA	NA	NA	1	ok (4b batch 33; worker killed by the shared session limit; tokens not reported)	0	claude-opus-5-5
+# KILLED	wave 6 (Opus: batch-23 repair + batches 31-35, 6 calls; Sonnet trial respawns of batches 24-25, 2 calls) killed by the shared session limit. Kept: opus 6 units ok; sonnet 2 ok + 9 complete-but-failed (evidence in gen/trial/sonnet_fail). Partial files discarded. Tokens not reported: estimated opus ~0.7M (6 calls: ~8 units + partials), sonnet ~0.95M (2 calls: 11 complete units + partials at ~78K/unit, the batch-23 Sonnet rate)
+# PROCESS	commits 2612f91 and e129097 used `git add gen/units` while Sonnet trial workers were still writing, sweeping 12 in-flight trial files (some failing to assemble) into history; build at those commits is broken. Fixed in the next commit; from now on only ledger-validated unit files are staged by name.
+8027CD98_AB268C8A	211	NA	NA	NA	2	ok (Opus repair of Sonnet trial failure, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802864EC_D3493704	154	NA	NA	NA	2	ok (Opus repair of Sonnet trial failure, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+8028D004_02FE781A	229	NA	NA	NA	2	ok (Opus repair of Sonnet trial failure, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+8028F914_90605411	220	NA	NA	NA	2	ok (Opus repair of Sonnet trial failure, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+8024D904_D7764A01	200	NA	NA	NA	1	ok (4b batch 31, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+80285964_3EACADF3	121	NA	NA	NA	1	ok (4b batch 35, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+80285B9C_F0060E8E	206	NA	NA	NA	1	ok (4b batch 31, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+8028A0EC_6D0619CA	214	NA	NA	NA	1	ok (4b batch 35, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802D2F04_5AE70E39	212	NA	NA	NA	1	ok (4b batch 32, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802D4708_47B1C096	184	NA	NA	NA	1	ok (4b batch 33, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802D4D6C_B83453C3	212	NA	NA	NA	1	ok (4b batch 32, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802D50CC_842FE216	201	NA	NA	NA	1	ok (4b batch 32, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802E2E58_AAAEC267	248	NA	NA	NA	1	ok (4b batch 35, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802FB470_521640FA	215	NA	NA	NA	1	ok (4b batch 34, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+802FF600_46F14C6D	202	NA	NA	NA	1	ok (4b batch 34, wave 7; worker killed by the weekly limit; tokens not reported)	0	claude-opus-5-5
+# KILLED	wave 7 (Opus: 2 repair calls + 5 bulk calls; Sonnet: 1 trial finisher call for 9 units of batches 24-25) killed by the weekly limit. Kept: opus 15 units ok (4 repairs, 11 bulk); sonnet finisher wrote no complete unit. 2 partial .s discarded. Tokens not reported: estimated opus ~1.1M (7 calls: 15 units + partials), sonnet ~0.1M (1 call, contract + inputs + partial work)
+# MODEL	model column = exact model id the harness sent to the API, read from each worker transcript: all Opus workers resolved to claude-opus-5-5 (125 agents) and every Agent-tool model "sonnet" spawn to claude-sonnet-5 (8 agents, including one spawned 2026-09-30); values relabelled from opus/sonnet on 2026-09-30
+80286224_C792694A	168	50662	20	1794.0	3	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+8027D13C_5FE85710	213	64229	20	1794.0	2	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+802CEAD8_BFCB790B	220	66339	20	1794.0	2	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+802D058C_76BC9EF1	164	49453	20	1794.0	2	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+802D0900_3BCDEFFB	211	63626	20	1794.0	2	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+802CD55C_BD5C5E19	216	65133	20	1794.0	2	ok (call 6 units, 359442 tokens) [Opus repair B of Sonnet trial failures]	0	claude-opus-5-5
+802895D0_D1153451	220	62649	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+80289AF4_21C237F7	173	49262	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+802843EC_E418A469	223	63500	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+8028A44C_4E01A8BB	211	60082	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+8028C344_7E10A4C4	240	68340	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+80280148_F64445E1	237	67486	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+80280630_3DAC6CF5	209	59513	23	2202.9	2	ok (call 7 units, 430832 tokens) [Opus repair A of Sonnet trial failures]	0	claude-opus-5-5
+802D40A8_0A0F0B88	206	56702	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802D4A30_D0E1E501	207	56973	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+80176B08_4D4F56EC	207	56973	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802ABBAC_39203254	188	51743	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802B9928_245AC199	185	50917	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802FF96C_E6AC3389	226	62202	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802E77FC_EEB4F24B	97	26697	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+80305D04_2AD49B40	187	51468	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802FF288_9E4CE64E	188	51743	29	2346.0	1	ok (call 9 units, 465418 tokens) [4b bulk B batches 32-33]	0	claude-opus-5-5
+802E4CEC_1ECE5AC7	204	57404	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+802E443C_F383F33B	234	65841	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+80379918_E31B2636	215	60495	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+80280C28_7F0B2F75	224	63028	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+8025E668_7928C6CC	214	60214	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+8025E080_CE7EF0E9	187	52617	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+802B0754_295A371B	218	61339	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+802645A4_7B0A8F48	182	51210	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+802AC78C_7918724E	81	22791	29	2526.2	1	ok (call 9 units, 494939 tokens) [4b bulk C batches 34-35]	0	claude-opus-5-5
+8024D488_4093C857	203	56964	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+80257B94_ECCFD9FC	204	57239	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802984A0_99E52A7A	231	64815	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802D5640_C10A8D80	205	57520	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802C3884_D5D966B8	208	58362	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+80281244_9BEDB2AD	247	69305	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802D3B40_E7F4B2CB	194	54434	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+8024E358_6B2D6FFB	203	56959	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802D29C0_498F021E	184	51628	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802D3ED4_E73B11AC	117	32828	32	2898.4	1	ok (call 10 units, 560054 tokens) [4b bulk A batches 31-32]	0	claude-opus-5-5
+802CF060_0CCE9D19	235	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+802CF744_8693EAE7	174	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+802CFA1C_7CAE7197	213	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+8027C8B4_FD68D829	206	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+8027BDF0_F9B90E67	214	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+802D1898_DB512AF4	174	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+802CD928_18338506	166	NA	NA	NA	1	fail: assemble error (see gen/trial/sonnet_trial.tsv) (4b batch 24-25 sonnet trial finisher; worker died on the 64K max-output-token limit, tokens not reported)	0	claude-sonnet-5
+802CDF34_F5CCEDC9	222	NA	NA	NA	1	incomplete: no output (sonnet trial finisher died on the 64K max-output-token limit before reaching this unit; not a validation result)	0	claude-sonnet-5
+802CDC40_ED9F0ED3	185	NA	NA	NA	1	incomplete: no output (sonnet trial finisher died on the 64K max-output-token limit before reaching this unit; not a validation result)	0	claude-sonnet-5
+# ESTIMATE	Sonnet 5 trial finisher (9 units, batches 24-25) terminated by API error max_output_tokens (one response exceeded 64000 output tokens) after writing 7 units, all failing to assemble; usage not reported; estimated ~0.8M (43 API turns; ~7 of 9 units, at the ~78K/unit batch-23 Sonnet rate plus overhead)
+802CF060_0CCE9D19	235	69009	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802CF744_8693EAE7	174	51090	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802CFA1C_7CAE7197	213	62542	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+8027C8B4_FD68D829	206	60486	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+8027BDF0_F9B90E67	214	62835	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802D1898_DB512AF4	174	51090	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802CD928_18338506	166	48741	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802CDF34_F5CCEDC9	222	65184	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+802CDC40_ED9F0ED3	185	54320	29	2597.4	2	ok (call 9 units, 525297 tokens) [Opus repair C of Sonnet trial failures]	0	claude-opus-5-5
+# DIVERGENCE	#3 (full route, 2026-09-30): first mismatch at icount 2,877,365,148 (stride-1 window via --checkpoint-from): native boundary at 802483A0, oracle at 8024839C; native then entered the TLB-refill vector 80000000. Cause: unit 80247F08_641534AD (opus, 4a pilot era) emitted the not-taken fallthrough after a delay slot that ends the listing as branch+12 instead of branch+8 (3 sites). A scan of all 535 units for the same defect (M2M_FALL target != last pc + 4, or +8 after a branch-likely) found it in 2 more units: 8017D75C_B479F853 (1 site) and 80246E70_4CDDCC1E (1 site, after an always-taken beq, dormant). All 3 re-prompted to Opus (attempt 2).
+8017D75C_B479F853	219	68963	12	867.4	2	ok (call 3 units, 195865 tokens) [Opus re-translation after divergence #3]	0	claude-opus-5-5
+80246E70_4CDDCC1E	203	63923	12	867.4	2	ok (call 3 units, 195865 tokens) [Opus re-translation after divergence #3]	0	claude-opus-5-5
+80247F08_641534AD	200	62979	12	867.4	2	fail: fallthrough after 80248338 (nop) targets 80248340 (call 3 units, 195865 tokens) [Opus re-translation after divergence #3]	0	claude-opus-5-5
+80247F08_641534AD	200	0	0	0	3	ok (hand-fix after one failed re-spawn: attempt-2 Opus output kept verbatim except the 3 not-taken fallthrough targets after gap-terminated delay slots, 6 lines, B+0xC -> B+8 per contract 7.1; divergence #3)	1	claude-opus-5-5 + hand
+# DIVERGENCE	#4 (full route, 2026-09-30): first mismatch at icount 9,483,837,417 (stride-1 window): same pc 8037A788, different state after block 8028B260. Cause: unit 8028B068_B6A73DD3 (claude-sonnet-5, trial) translated trunc.w.s at 8028B2A4 per the literal §9 recipe, storing w16 after M2M_FPU_END, which clobbers x16 (the §9 ambiguity noted at 1e25877). This is the only Sonnet-5 unit that passed validation and then failed lockstep; scans of all 535 units and the 20 Sonnet-5.5 trial units found no other read of a macro-clobbered scratch register and no stale-flag reads. The validator now rejects scratch reads after any macro. Re-translated by Opus (repair). Sonnet-5 failure evidence kept as gen/trial/sonnet_fail/unit_8028B068_B6A73DD3.a1.lockstep.{s,json}.
+# KILLED	Opus repair of 8028B068 (divergence #4) killed by the session limit after writing .s but not .json; half-pair discarded; tokens not reported, estimated ~0.15M (1 unit, contract + input + one 200-instruction unit)
+8028B068_B6A73DD3	246	108873	5	362.5	2	ok (call 1 units, 108873 tokens) [Opus repair after divergence #4]	0	claude-opus-5-5

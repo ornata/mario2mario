@@ -1,0 +1,30 @@
+unit	attempt	batch	instructions	result	asm_errors	wzr_imm_errors	other_errors	other_detail
+8027FB58_99F85922	1	23	217	ok	0	0	0	-
+80280148_F64445E1	1	23	237	fail	3	3	0	-
+80280630_3DAC6CF5	1	23	209	fail	2	2	0	-
+80283FA0_73D7C6C5	1	23	188	fail	4	4	0	-
+802843EC_E418A469	1	23	223	fail	2	2	0	-
+802895D0_D1153451	1	23	220	fail	2	2	0	-
+80289AF4_21C237F7	1	23	173	fail	1	1	0	-
+8028A44C_4E01A8BB	1	23	211	fail	2	2	0	-
+8028C344_7E10A4C4	1	23	240	fail	13	10	3	assembler local symbol 'L_8028C6B8' not defined []; expected compatible register, symbol or integer in range [0, 4095] [cmp x16, #0x1927]; expected compatible register, symbol or integer in range [0, 
+8028F914_90605411	1	23	220	fail	5	5	0	-
+8027BDF0_F9B90E67	1	24	214	fail	4	4	0	-
+8027C8B4_FD68D829	1	24	206	fail	8	8	0	-
+80286224_C792694A	1	24	168	fail	2	2	0	-
+80286224_C792694A	2	24	168	fail	2	2	0	-
+802864EC_D3493704	1	24	154	fail	3	3	0	-
+8028B068_B6A73DD3	1	24	246	ok	0	0	0	-
+8028D004_02FE781A	1	24	229	fail	7	7	0	-
+802CF060_0CCE9D19	1	24	235	fail	5	4	1	assembler local symbol 'L_802CF550' not defined []
+802CF744_8693EAE7	1	24	174	fail	22	22	0	-
+802CFA1C_7CAE7197	1	24	213	fail	1	1	0	-
+802D1898_DB512AF4	1	24	174	fail	2	2	0	-
+8027CD98_AB268C8A	1	25	211	fail	4	4	0	-
+8027D13C_5FE85710	1	25	213	fail	7	7	0	-
+802CD55C_BD5C5E19	1	25	216	fail	2	2	0	-
+802CD928_18338506	1	25	166	fail	13	13	0	-
+802CEAD8_BFCB790B	1	25	220	fail	16	16	0	-
+802D058C_76BC9EF1	1	25	164	fail	7	7	0	-
+802D0900_3BCDEFFB	1	25	211	fail	2	2	0	-
+80379790_25B40F7E	1	25	96	ok	0	0	0	-

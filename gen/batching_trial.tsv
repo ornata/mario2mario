@@ -1,0 +1,10 @@
+# Phase 4b batching trial (exact subagent_tokens, claude-opus-5-5, frozen contract 1e25877).
+# 1-4 units/call rows are the Phase 4a pilot calls, for reference; 6/10/15 are the trial.
+units_per_call	calls	instructions	tokens	tokens_per_instruction	first_pass_valid	untranslatable	notes
+1	17	3108	1465320	471.5	16/17	1	pilot (one UNTRANSLATABLE exposed a contract gap)
+2	8	3330	1193361	358.4	8/8	0	pilot
+3	16	9380	3183262	339.4	16/16	0	pilot
+4	1	777	242365	311.9	1/1	0	pilot
+6	1	1189	326591	274.7	6/6	0	trial
+10	1	2054	548861	267.2	10/10	0	trial; chosen for full coverage
+15	1	3335	877691	263.2	15/15	0	trial; ~878K-token call is near the context limit and costs most when killed
